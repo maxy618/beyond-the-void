@@ -1,0 +1,25 @@
+BEYOND THE VOID — ENGLISH SPECIFICATION PACK
+
+All documents, prompts, filenames, examples, and prototype UI labels in this package are English.
+
+Files:
+  README.md
+  OPENCODE_BOOTSTRAP_PROMPT.md
+  BTV_AGENT_MEGA_PROMPT.md
+  STORY_BIBLE.md
+  CONTENT_AND_DATA_ARCHITECTURE.md
+  QA_AND_DEVICE_TEST_PLAN.md
+  OPENCODE_AND_MCP.md
+  opencode.jsonc.example
+  legacy-prototype-fixed.html
+  content_examples/example_dialogue_salt_signal.json
+  content_examples/example_item_crystal_fiber.json
+  content_examples/example_market_threshold.json
+  content_examples/example_quest_find_relay.json
+  content_examples/example_ship_photon_courier.json
+  content_examples/example_species_mist_manta.json
+
+Recommended destination inside an existing game repository:
+  docs/beyond_the_void_spec/
+
+The specification folder is reference material only. The actual Godot project and game implementation belong at the real repository root, outside docs/beyond_the_void_spec/.

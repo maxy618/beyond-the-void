@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "content_id": "species.mist_manta",
+  "content_version": "1.0.0",
+  "display_name": "Mist Manta",
+  "classification": "aerial_filter_feeder",
+  "rarity": "uncommon",
+  "biome_tags": ["cold_coast", "mineral_fog"],
+  "body_plan": "floating_ribbon",
+  "size_m": [2.5, 5.0],
+  "temperament": "wary",
+  "intelligence": "low_social",
+  "senses": ["pressure", "bioluminescence", "electromagnetic_field"],
+  "needs": {
+    "temperature_c": [-18, 4],
+    "gravity_g": [0.3, 1.8],
+    "atmosphere_tags": ["thin", "mineral_aerosol"],
+    "food_tags": ["spore", "microcrystal"],
+    "water_required": false
+  },
+  "ecology": {
+    "diet": ["flora.glass_spore"],
+    "predators": ["species.needle_kite"],
+    "symbiosis": ["flora.blue_lantern_lichen"],
+    "active_period": "dusk",
+    "migration": "seasonal_band",
+    "population_model": "resource_limited",
+    "ecological_role": ["aerial_filter_feeder", "spore_disperser"]
+  },
+  "behaviour": {
+    "states": ["drift", "feed", "flee_from_flash", "cluster_during_storm"],
+    "provocation_tags": ["bright_pulse", "sudden_close_approach"],
+    "observe_without_harm": true,
+    "capture_allowed": false,
+    "recovery_after_disturbance_seconds": 180
+  },
+  "interactions": [
+    {
+      "id": "observe_glide",
+      "tool_mode": "multitool.observation",
+      "result_flag": "fieldlog.mist_manta_glide",
+      "reputation_effect": 1
+    },
+    {
+      "id": "emit_soft_pulse",
+      "tool_mode": "multitool.bio_resonator",
+      "condition": "not_in_storm",
+      "result": "may_approach_briefly"
+    }
+  ],
+  "drops": [],
+  "research_rewards": { "credits": 18, "knowledge": "knowledge.coastal_migration", "unlock": "recipe.mist_filter" },
+  "ethical_rules": { "harvestable": false, "harm_penalty": "faction.tidekeepers:-5", "non_invasive_observation_preferred": true },
+  "localization": {
+    "field_note": "Mist mantas feed on suspended spores and fine mineral particles. Their dusk migrations help distribute spores between coastal shelves.",
+    "observation_hint": "Watch from downwind and avoid sudden bright pulses."
+  }
+}

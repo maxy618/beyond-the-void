@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "content_id": "quest.salt_signal",
+  "content_version": "1.0.0",
+  "type": "side",
+  "title": "A Signal in the Salt",
+  "summary": "Restore the tidal transmitter and investigate the source of a repeating signal.",
+  "recommended_level": 1,
+  "tags": ["exploration", "story", "mystery", "repair"],
+  "repeatable": false,
+  "start_conditions": [{ "type": "flag", "id": "dialogue.kasa_help_accepted" }],
+  "steps": [
+    {
+      "id": "reach_relay",
+      "objective": "Find the transmitter beyond the tidal gate.",
+      "completion": { "type": "enter_location", "id": "location.salt_relay" }
+    },
+    {
+      "id": "restore_power",
+      "objective": "Restore power using insulated fiber.",
+      "completion": { "type": "interact", "id": "object.relay_console", "action": "restore_power" },
+      "requirements": [{ "type": "item_count", "id": "item.insulated_fiber", "count": 2 }]
+    },
+    {
+      "id": "record_signal",
+      "objective": "Record three distinct signal fragments.",
+      "completion": { "type": "counter", "id": "signal_fragment_recorded", "target": 3 }
+    },
+    {
+      "id": "report_kasa",
+      "objective": "Return to Kasa and explain what you found.",
+      "completion": { "type": "dialogue_choice", "id": "dialogue.kasa_signal_report", "choice": "tell_truth" }
+    }
+  ],
+  "rewards": {
+    "credits": 85,
+    "items": [{ "id": "item.saltglass_shard", "count": 2 }],
+    "reputation": [{ "faction": "faction.tidekeepers", "amount": 3 }],
+    "flags": ["story.salt_signal_heard"],
+    "idempotency_key": "reward.quest.salt_signal.v1"
+  },
+  "failure_policy": { "fail_on_death": false, "allow_abandon": true, "allow_recovery": true },
+  "content_dependencies": ["dialogue.salt_signal", "item.insulated_fiber", "item.saltglass_shard"],
+  "journal_entries": {
+    "started": "Kasa has asked me to inspect the tidal transmitter beyond the old gate.",
+    "completed": "The transmitter is alive again. The signal is real, but its origin remains unclear."
+  }
+}

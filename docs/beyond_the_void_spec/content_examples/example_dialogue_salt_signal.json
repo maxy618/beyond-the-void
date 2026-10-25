@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "content_id": "dialogue.salt_signal",
+  "content_version": "1.0.0",
+  "locale": "en",
+  "speaker": "npc.kasa_e",
+  "entry_node": "arrival",
+  "nodes": {
+    "arrival": {
+      "text": "Can you hear that hum? Don't move. It isn't in the stone. It's coming from our old transmitters.",
+      "choices": [
+        { "id": "ask_signal", "text": "What is the signal transmitting?", "next": "explain", "effects": [] },
+        {
+          "id": "offer_help",
+          "text": "I can inspect the transmitter.",
+          "next": "accept",
+          "conditions": [{ "type": "quest_not_active", "id": "quest.salt_signal" }],
+          "effects": [{ "type": "start_quest", "id": "quest.salt_signal" }]
+        },
+        { "id": "leave", "text": "I'll come back later.", "next": "farewell", "effects": [] }
+      ]
+    },
+    "explain": {
+      "text": "I don't know. My mother called it the voice of the salt storm. She died long before I heard it for the first time.",
+      "choices": [
+        { "id": "ask_mother", "text": "Do you think it's her?", "next": "memory", "effects": [] },
+        { "id": "help", "text": "Give me the transmitter coordinates.", "next": "accept", "effects": [{ "type": "start_quest", "id": "quest.salt_signal" }] }
+      ]
+    },
+    "memory": {
+      "text": "I think I want it to be her. That isn't the same thing. Don't mistake hope for evidence.",
+      "choices": [
+        { "id": "back", "text": "Show me the transmitter.", "next": "accept", "effects": [{ "type": "start_quest", "id": "quest.salt_signal" }] }
+      ]
+    },
+    "accept": {
+      "text": "It's beyond the old tidal gate. If you hear your own voice answering you, cut the power and leave.",
+      "choices": [{ "id": "ack", "text": "I'll be careful.", "next": "end", "effects": [] }]
+    },
+    "farewell": {
+      "text": "Don't blame yourself for being unable to help everyone. Even stars can't hold on to every spark.",
+      "choices": [{ "id": "end", "text": "See you later.", "next": "end", "effects": [] }]
+    },
+    "end": { "text": "", "terminal": true }
+  }
+}

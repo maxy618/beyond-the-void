@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#070a13">
+<title>Star Hopper — Fixed Prototype</title>
+<style>
+  :root{color-scheme:dark}
+  *{box-sizing:border-box}
+  html,body{margin:0;width:100%;height:100%;background:#070a13;font-family:system-ui,sans-serif;overflow:hidden;overscroll-behavior:none}
+  .stage{position:relative;width:100vw;height:100vh;height:100dvh;overflow:hidden;background:#070a13;touch-action:none;user-select:none;-webkit-user-select:none}
+  #cv{position:absolute;inset:0;width:100%;height:100%;image-rendering:auto;z-index:1;display:block}
+  .fx{position:absolute;inset:0;pointer-events:none;z-index:2}
+  .scanlines{background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);animation:flick 4s steps(12) infinite}
+  @keyframes flick{0%,100%{opacity:.9}50%{opacity:.75}}
+  .vig{background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55) 100%)}
+  .grain{opacity:.07;animation:gr .5s steps(3) infinite}
+  @keyframes gr{0%{background-position:0 0}33%{background-position:24px 40px}66%{background-position:-30px 12px}100%{background-position:0 0}}
+  #warpfx{position:absolute;inset:0;background:#000;opacity:0;transition:opacity .45s ease;pointer-events:none;z-index:3}
+  .hud{position:absolute;z-index:4;display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap;max-width:calc(100vw - 16px)}
+  .hud.tl{top:calc(8px + env(safe-area-inset-top));left:8px;right:8px}
+  .hud.tr{top:calc(48px + env(safe-area-inset-top));right:8px;max-width:45vw;flex-direction:column}
+  .chip{border:1px solid #2e3340;border-radius:6px;background:rgba(24,28,40,.82);padding:4px 8px;font-size:12px;color:#9aa3b5;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+  .chip b{color:#eef1f7;font-weight:500;font-variant-numeric:tabular-nums}
+  #log{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+  #log .chip{font-size:11px;max-width:45vw;overflow-wrap:anywhere}
+  .hint{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(4px + env(safe-area-inset-bottom));z-index:4;font-size:12px;color:#8790a5;background:rgba(7,10,19,.72);padding:4px 10px;border-radius:6px;pointer-events:none;white-space:normal;text-align:center;max-width:calc(100vw - 240px)}
+  #joy{position:absolute;left:calc(14px + env(safe-area-inset-left));bottom:calc(14px + env(safe-area-inset-bottom));width:clamp(88px,24vw,112px);height:clamp(88px,24vw,112px);border-radius:50%;border:1px solid #3a4358;background:rgba(24,28,40,.42);z-index:5;touch-action:none}
+  #stick{position:absolute;left:50%;top:50%;width:40%;height:40%;border-radius:50%;background:rgba(238,241,247,.84);transform:translate(-50%,-50%);pointer-events:none}
+  .btns{position:absolute;right:calc(14px + env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:8px;z-index:5}
+  .btns button{border:1px solid #39445c;border-radius:10px;background:rgba(24,28,40,.9);color:#eef1f7;font:600 14px system-ui;padding:13px 14px;min-width:clamp(92px,26vw,112px);min-height:46px;cursor:pointer;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);transition:transform .12s ease-out;touch-action:manipulation}
+  .btns button:active{transform:scale(.96)}
+  .btns button:disabled{opacity:.35;cursor:default}
+  #scanBtn{border-color:#3d5a8a}
+  #toast{position:absolute;top:calc(90px + env(safe-area-inset-top));left:50%;transform:translateX(-50%) translateY(-8px);z-index:6;opacity:0;transition:opacity .25s ease,transform .25s ease;border:1px solid #2e3340;border-radius:8px;background:rgba(24,28,40,.94);color:#eef1f7;font-size:13px;padding:8px 12px;pointer-events:none;max-width:calc(100vw - 32px);text-align:center}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  #fxBtn{position:absolute;top:calc(8px + env(safe-area-inset-top));right:8px;z-index:4;cursor:pointer;color:#c0c9dc;font:12px system-ui;min-height:32px}
+  @media(max-width:380px){.chip{font-size:11px;padding:3px 6px}.hud.tl{gap:4px}.hint{max-width:calc(100vw - 210px);font-size:10px}.btns button{font-size:12px;padding:10px 9px;min-width:88px}}
+  @media(prefers-reduced-motion:reduce){.scanlines,.grain{animation:none}*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <canvas id="cv" aria-label="Star Hopper game field"></canvas>
+  <div class="fx scanlines" id="fx1"></div>
+  <div class="fx vig" id="fx2"></div>
+  <div class="fx grain" id="grain"></div>
+  <div id="warpfx"></div>
+  <div class="hud tl">
+    <span class="chip">System <b id="sysName">—</b></span>
+    <span class="chip">✦ <b id="cr">0</b></span>
+    <span class="chip">Planets <b id="pf">0/0</b></span>
+  </div>
+  <div class="hud tr" id="log"></div>
+  <button class="chip" id="fxBtn" type="button">CRT: ON</button>
+  <div class="hint" id="hint">WASD / arrows — move · Space — scan</div>
+  <div id="joy" aria-label="Movement joystick"><div id="stick"></div></div>
+  <div class="btns">
+    <button id="scanBtn" type="button">Scan</button>
+    <button id="warpBtn" type="button">Warp ➤</button>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+</div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const cv=$('cv'),ctx=cv.getContext('2d',{alpha:false});
+// W/H are logical viewport dimensions. They change with the window aspect ratio;
+// the canvas backing buffer tracks device pixel ratio, while the world remains undistorted.
+let W=480,H=300,viewScale=1,deviceScale=1;
+const ACCENT='#4d8dff';
+const SYL=['Ka','Zu','En','To','Ri','Ve','Mo','La','Si','Du','No','He','Yur','Fa','Os','Ta','Io','Pa'];
+const PHUE=['#7fd8a4','#e8a15c','#8fb4e8','#d98fb8','#c9d66b','#e87f7f'];
+const SHUE=['#ffd166','#ff8c5a','#9be7ff','#ffb3d1'];
+function resizeCanvas(){
+  const rect=$('stage').getBoundingClientRect();
+  const width=Math.max(1,rect.width),height=Math.max(1,rect.height);
+  viewScale=Math.min(width/480,height/300);
+  W=width/viewScale;H=height/viewScale;
+  deviceScale=Math.min(window.devicePixelRatio||1,2.5);
+  const bw=Math.max(1,Math.round(width*deviceScale)),bh=Math.max(1,Math.round(height*deviceScale));
+  if(cv.width!==bw||cv.height!==bh){cv.width=bw;cv.height=bh}
+  ctx.setTransform(viewScale*deviceScale,0,0,viewScale*deviceScale,0,0);
+  ctx.imageSmoothingEnabled=true;
+}
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let R=mulberry((Math.random()*1e9)|0);
+const pick=arr=>arr[(R()*arr.length)|0];
+const nameGen=n=>{let s='';for(let i=0;i<n;i++)s+=pick(SYL);return s};
+const WORLD=3200;
+let star,planets,rocks,bgStars,sysName,total=0;
+const ship={x:0,y:0,vx:0,vy:0,ang:0,heat:0};
+let camX=0,camY=0,credits=0,found=0,scanT=0,scanTarget=null,shake=0,warpping=false,tGlob=0,engineSfxCooldown=0;
+const keys={},joy={x:0,y:0,on:false};
+function genSystem(){
+  R=mulberry((Math.random()*1e9)|0);
+  sysName=nameGen(2)+'-'+(100+((R()*899)|0));
+  star={x:WORLD/2,y:WORLD/2,r:24+R()*12,c:pick(SHUE)};
+  planets=[];total=3+((R()*3)|0);
+  for(let i=0;i<total;i++)planets.push({orbit:300+i*230+R()*130,ang:R()*6.283,spd:(0.04+R()*0.07)*(R()<0.5?1:-1)/(1+i*0.45),r:11+R()*15,c:pick(PHUE),disc:false,name:nameGen(2),reward:60+((R()*160)|0)});
+  rocks=[];for(let i=0;i<70;i++)rocks.push({x:R()*WORLD,y:R()*WORLD,r:3+R()*7,rot:R()*6.283,spr:(R()-0.5)*1.6,pts:Array.from({length:7},()=>0.75+R()*0.5)});
+  bgStars=[];for(let i=0;i<260;i++)bgStars.push({x:R()*WORLD,y:R()*WORLD,s:R(),tw:R()*6.28});
+  const a=R()*6.283;
+  ship.x=star.x+Math.cos(a)*620;ship.y=star.y+Math.sin(a)*620;
+  ship.vx=ship.vy=0;ship.heat=0;
+}
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas,{passive:true});
+if(window.visualViewport)window.visualViewport.addEventListener('resize',resizeCanvas,{passive:true});
+genSystem();
+let AC=null;
+function beep(f,d,type,v){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const o=AC.createOscillator(),g=AC.createGain();o.type=type||'square';o.frequency.value=f;g.gain.setValueAtTime(v||0.035,AC.currentTime);g.gain.exponentialRampToValueAtTime(0.0001,AC.currentTime+(d||0.12));o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+(d||0.12))}catch(e){}}
+let toastTO=null;
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTO);toastTO=setTimeout(()=>t.classList.remove('show'),2200)}
+function currentPlanetPosition(p){return{x:star.x+Math.cos(p.ang)*p.orbit,y:star.y+Math.sin(p.ang)*p.orbit}}
+function nearestPlanet(){let best=null,bd=1e9;for(const p of planets){if(p.disc)continue;const pos=currentPlanetPosition(p);const d=Math.hypot(pos.x-ship.x,pos.y-ship.y);if(d<p.r+95&&d<bd){bd=d;best={p,px:pos.x,py:pos.y}}}return best}
+function logAdd(txt){const l=$('log'),d=document.createElement('span');d.className='chip';d.textContent=txt;l.prepend(d);while(l.children.length>3)l.lastChild.remove()}
+function doScan(){if(scanTarget||warpping)return;const n=nearestPlanet();if(!n){toast('No target within scanner range');return}scanTarget=n.p;scanT=0;beep(520,0.1)}
+function doWarp(){if(warpping)return;warpping=true;beep(180,0.5,'sawtooth',0.05);$('warpfx').style.opacity=1;setTimeout(()=>{genSystem();found=0;scanTarget=null;scanT=0;$('log').innerHTML='';updateHUD();toast('System '+sysName);$('warpfx').style.opacity=0;warpping=false;beep(660,0.15)},520)}
+$('scanBtn').addEventListener('click',doScan);$('warpBtn').addEventListener('click',doWarp);
+$('fxBtn').addEventListener('click',()=>{const on=$('fx1').style.display!=='none';['fx1','fx2','grain'].forEach(i=>$(i).style.display=on?'none':'block');$('fxBtn').textContent=on?'CRT: OFF':'CRT: ON'});
+if('ontouchstart'in window)$('hint').textContent='Joystick — move · Approach a planet to scan it';
+const joyEl=$('joy'),stick=$('stick');let joyId=null;
+function jmove(e){const r=joyEl.getBoundingClientRect();let dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);const max=Math.max(1,r.width/2-14),l=Math.hypot(dx,dy);if(l>max){dx*=max/l;dy*=max/l}stick.style.transform=`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px))`;joy.x=dx/max;joy.y=dy/max}
+joyEl.addEventListener('pointerdown',e=>{e.preventDefault();joyId=e.pointerId;joy.on=true;joyEl.setPointerCapture(e.pointerId);jmove(e)});
+joyEl.addEventListener('pointermove',e=>{if(e.pointerId===joyId)jmove(e)});
+const jend=e=>{if(e.pointerId===joyId){joyId=null;joy.on=false;joy.x=joy.y=0;stick.style.transform='translate(-50%,-50%)'}};
+joyEl.addEventListener('pointerup',jend);joyEl.addEventListener('pointercancel',jend);joyEl.addEventListener('lostpointercapture',jend);
+addEventListener('keydown',e=>{const k=e.key.toLowerCase();keys[k]=true;if(e.key===' '){e.preventDefault();doScan()}if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))e.preventDefault()});
+addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false});
+function clearInput(){for(const k of Object.keys(keys))keys[k]=false;joy.x=joy.y=0;joy.on=false;joyId=null;stick.style.transform='translate(-50%,-50%)'}
+addEventListener('blur',clearInput);document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInput()});
+document.addEventListener('pointerdown',()=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume()}catch(e){}},{once:true});
+(function grain(){const g=document.createElement('canvas');g.width=g.height=128;const c=g.getContext('2d'),id=c.createImageData(128,128);for(let i=0;i<id.data.length;i+=4){const v=(Math.random()*255)|0;id.data[i]=id.data[i+1]=id.data[i+2]=v;id.data[i+3]=255}c.putImageData(id,0,0);$('grain').style.backgroundImage='url('+g.toDataURL()+')'})();
+function input(){let x=0,y=0;if(keys['arrowup']||keys['w'])y-=1;if(keys['arrowdown']||keys['s'])y+=1;if(keys['arrowleft']||keys['a'])x-=1;if(keys['arrowright']||keys['d'])x+=1;if(joy.on){x=joy.x;y=joy.y}const l=Math.hypot(x,y);return l>0.12?{x:x/l,y:y/l,m:Math.min(1,l)}:{x:0,y:0,m:0}}
+function update(dt){
+  tGlob+=dt;engineSfxCooldown=Math.max(0,engineSfxCooldown-dt);
+  const inp=input();
+  if(inp.m>0&&!warpping){ship.vx+=inp.x*250*dt*inp.m;ship.vy+=inp.y*250*dt*inp.m;const ta=Math.atan2(ship.vy,ship.vx);let da=ta-ship.ang;while(da>Math.PI)da-=6.283;while(da<-Math.PI)da+=6.283;ship.ang+=da*Math.min(1,dt*9);if(engineSfxCooldown<=0){beep(70+Math.random()*30,0.05,'triangle',0.012);engineSfxCooldown=0.09}}
+  const dr=Math.exp(-1.5*dt);ship.vx*=dr;ship.vy*=dr;
+  const sp=Math.hypot(ship.vx,ship.vy),mx=220;if(sp>mx){ship.vx*=mx/sp;ship.vy*=mx/sp}
+  ship.x=Math.max(20,Math.min(WORLD-20,ship.x+ship.vx*dt));ship.y=Math.max(20,Math.min(WORLD-20,ship.y+ship.vy*dt));
+  for(const p of planets)p.ang+=p.spd*dt;
+  for(const r of rocks){r.rot+=r.spr*dt;const dx=ship.x-r.x,dy=ship.y-r.y,d=Math.hypot(dx,dy);if(d<r.r+9){const safeD=Math.max(d,0.0001),nx=d>0?dx/safeD:1,ny=d>0?dy/safeD:0;ship.x=r.x+nx*(r.r+9.5);ship.y=r.y+ny*(r.r+9.5);const dot=ship.vx*nx+ship.vy*ny;if(dot<0){ship.vx-=1.6*dot*nx;ship.vy-=1.6*dot*ny;shake=5;beep(140,0.08,'sawtooth',0.04)}}}
+  const ds=Math.hypot(star.x-ship.x,star.y-ship.y);
+  if(ds<star.r+85){ship.heat=Math.min(1,ship.heat+dt*1.1);if(ship.heat>=1){const safeD=Math.max(ds,0.0001),nx=ds>0?(ship.x-star.x)/safeD:1,ny=ds>0?(ship.y-star.y)/safeD:0;ship.vx=nx*320;ship.vy=ny*320;ship.heat=0.45;shake=9;toast('⚠ Engine overheating!');beep(220,0.3,'sawtooth',0.06)}}else ship.heat=Math.max(0,ship.heat-dt*0.7);
+  if(scanTarget){const p=scanTarget,pos=currentPlanetPosition(p),d=Math.hypot(pos.x-ship.x,pos.y-ship.y);if(p.disc||d>p.r+150){scanTarget=null;scanT=0}else{scanT+=dt;if(scanT>=1.3){p.disc=true;found++;credits+=p.reward;scanTarget=null;scanT=0;toast('Planet discovered: '+p.name+' · +'+p.reward+'✦');logAdd('✓ '+p.name+' · +'+p.reward);beep(740,0.12);setTimeout(()=>beep(990,0.15),120);updateHUD()}}}
+  camX=Math.max(0,Math.min(WORLD-W,ship.x-W/2));camY=Math.max(0,Math.min(WORLD-H,ship.y-H/2));shake=Math.max(0,shake-dt*14);updateHUD();
+}
+function updateHUD(){$('sysName').textContent=sysName;$('cr').textContent=credits;$('pf').textContent=found+'/'+total;$('scanBtn').disabled=!(scanTarget||nearestPlanet())}
+function draw(){
+  ctx.fillStyle='#070a13';ctx.fillRect(0,0,W,H);const ox=(Math.random()-0.5)*shake,oy=(Math.random()-0.5)*shake;ctx.save();ctx.translate(ox,oy);
+  for(const s of bgStars){let sx=(s.x-camX*0.55)%WORLD;if(sx<0)sx+=WORLD;let sy=(s.y-camY*0.55)%WORLD;if(sy<0)sy+=WORLD;if(sx<W&&sy<H){const a=0.3+0.7*Math.abs(Math.sin(tGlob*1.5+s.tw));ctx.fillStyle=`rgba(255,255,255,${(a*(0.3+s.s*0.7)).toFixed(2)})`;ctx.fillRect(sx|0,sy|0,s.s>0.8?2:2,s.s>0.8?2:1)}}
+  ctx.strokeStyle='rgba(255,255,255,0.07)';ctx.setLineDash([2,4]);ctx.lineWidth=1;for(const p of planets){ctx.beginPath();ctx.arc(star.x-camX,star.y-camY,p.orbit,0,6.283);ctx.stroke()}ctx.setLineDash([]);
+  const sx=star.x-camX,sy=star.y-camY,pul=Math.sin(tGlob*2)*1.5;
+  if(sx>-80&&sx<W+80&&sy>-80&&sy<H+80){const g=ctx.createRadialGradient(sx,sy,0,sx,sy,star.r*4);g.addColorStop(0,star.c+'55');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(sx-star.r*4,sy-star.r*4,star.r*8,star.r*8);ctx.fillStyle=star.c;ctx.beginPath();ctx.arc(sx,sy,star.r+pul,0,6.283);ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(sx,sy,star.r*0.45+pul*0.3,0,6.283);ctx.fill()}
+  for(const p of planets){const pos=currentPlanetPosition(p),px=pos.x-camX,py=pos.y-camY;if(px<-40||px>W+40||py<-40||py>H+40)continue;const la=Math.atan2(py-sy,px-sx);ctx.save();ctx.beginPath();ctx.arc(px,py,p.r,0,6.283);ctx.clip();ctx.fillStyle=p.c;ctx.fillRect(px-p.r,py-p.r,p.r*2,p.r*2);ctx.fillStyle='rgba(0,0,20,0.45)';ctx.beginPath();ctx.arc(px-Math.cos(la)*p.r*0.6,py-Math.sin(la)*p.r*0.6,p.r,0,6.283);ctx.fill();if(((px|0)+(py|0))%9<4){ctx.fillStyle='rgba(255,255,255,0.08)';ctx.fillRect(px-p.r,py-1,p.r*2,1)}ctx.restore();if(p.disc){ctx.strokeStyle=ACCENT;ctx.lineWidth=1;ctx.beginPath();ctx.arc(px,py,p.r+3,0,6.283);ctx.stroke()}else if(Math.hypot(pos.x-ship.x,pos.y-ship.y)<170){ctx.fillStyle='rgba(255,255,255,0.6)';ctx.font='9px system-ui';ctx.textAlign='center';ctx.fillText('?',px,py+3)}if(scanTarget===p){ctx.strokeStyle=ACCENT;ctx.lineWidth=2;ctx.beginPath();ctx.arc(px,py,p.r+6,-1.57,-1.57+6.283*(scanT/1.3));ctx.stroke();ctx.setLineDash([3,3]);ctx.strokeStyle='rgba(255,255,255,0.4)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ship.x-camX,ship.y-camY);ctx.lineTo(px,py);ctx.stroke();ctx.setLineDash([])}}
+  ctx.fillStyle='#3a3f4d';for(const r of rocks){const rx=r.x-camX,ry=r.y-camY;if(rx<-20||rx>W+20||ry<-20||ry>H+20)continue;ctx.save();ctx.translate(rx,ry);ctx.rotate(r.rot);ctx.beginPath();for(let i=0;i<7;i++){const a=i/7*6.283,rr=r.r*r.pts[i];i?ctx.lineTo(Math.cos(a)*rr,Math.sin(a)*rr):ctx.moveTo(Math.cos(a)*rr,Math.sin(a)*rr)}ctx.closePath();ctx.fill();ctx.strokeStyle='#565d70';ctx.lineWidth=1;ctx.stroke();ctx.restore()}
+  ctx.save();ctx.translate(ship.x-camX,ship.y-camY);ctx.rotate(ship.ang);const inp=input();if(inp.m>0){ctx.fillStyle=`rgba(255,${(140+Math.random()*80)|0},60,0.9)`;ctx.beginPath();ctx.moveTo(-6,-3);ctx.lineTo(-6-Math.random()*8-6,0);ctx.lineTo(-6,3);ctx.fill()}ctx.fillStyle='#e8e8f0';ctx.beginPath();ctx.moveTo(9,0);ctx.lineTo(-6,-5);ctx.lineTo(-3,0);ctx.lineTo(-6,5);ctx.closePath();ctx.fill();ctx.fillStyle=ACCENT;ctx.fillRect(-1,-1.5,4,3);ctx.restore();
+  if(ship.heat>0.05){ctx.fillStyle=`rgba(255,60,30,${(ship.heat*0.22).toFixed(2)})`;ctx.fillRect(0,0,W,H)}ctx.restore();
+}
+let last=performance.now();function loop(t){const dt=Math.min(0.05,Math.max(0,(t-last)/1000));last=t;update(dt);draw();requestAnimationFrame(loop)}
+updateHUD();requestAnimationFrame(loop);
+</script>
+</body>
+</html>

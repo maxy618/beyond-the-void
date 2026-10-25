@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "content_id": "market.coast",
+  "content_version": "1.0.0",
+  "market_type": "settlement_exchange",
+  "settlement": "settlement.tidebreak",
+  "region": "region.salt_coast",
+  "currency": "credits",
+  "update_interval_seconds": 900,
+  "stock_model": "finite_supply_demand",
+  "initial_stock": [
+    { "item": "item.saltglass_shard", "quantity": 34, "target_stock": 60, "local_production": 6, "consumption_per_cycle": 3 },
+    { "item": "item.insulated_fiber", "quantity": 7, "target_stock": 25, "local_production": 1, "consumption_per_cycle": 5 }
+  ],
+  "demand_modifiers": [
+    { "tag": "electrical_repair", "multiplier": 1.35 },
+    { "tag": "luxury", "multiplier": 0.7 }
+  ],
+  "trade_rules": {
+    "buy_price_formula": "base_value * regional_modifier * scarcity_modifier * reputation_modifier",
+    "sell_price_formula": "base_value * regional_modifier * supply_modifier * reputation_modifier",
+    "minimum_price_factor": 0.45,
+    "maximum_price_factor": 3.5,
+    "player_transaction_atomic": true,
+    "prevent_negative_stock": true,
+    "prevent_negative_credits": true,
+    "transaction_idempotency_required": true,
+    "market_saturation_affects_price": true
+  },
+  "rumors": ["rumor.relay_shortage", "rumor.coastal_migration"],
+  "event_hooks": [
+    {
+      "event": "storm_damage",
+      "effect": "increase_demand",
+      "tags": ["repair", "insulation"],
+      "multiplier": 1.4
+    }
+  ],
+  "player_facing_explanations": {
+    "low_stock": "Local stock is below its target level.",
+    "high_demand": "Recent storm damage has increased demand for repairs and insulation.",
+    "last_update": "Show the last simulation update time in the market details view."
+  }
+}

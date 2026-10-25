@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "content_id": "ship.photon_courier",
+  "content_version": "1.0.0",
+  "display_name": "Photon Courier",
+  "class": "light_courier",
+  "manufacturer": "faction.lantern_union",
+  "role_tags": ["fast_delivery", "exploration"],
+  "base_stats": {
+    "hull": 72,
+    "shield": 40,
+    "cargo_slots": 18,
+    "cargo_mass_kg": 450,
+    "acceleration": 1.25,
+    "top_speed": 1.35,
+    "maneuverability": 1.4,
+    "jump_range": 0.85,
+    "thermal_capacity": 0.9,
+    "landing_tolerance": 1.15
+  },
+  "hardpoints": { "utility": 3, "defense": 1, "engine": 2, "cosmetic": 4 },
+  "compatibility_tags": ["sail.lightfilm", "drive.ion_fold", "scanner.longwave"],
+  "power_budget": 100,
+  "fuel_capacity": 80,
+  "upgrades": {
+    "engine": ["module.ion_fin", "module.silent_nozzle"],
+    "utility": ["module.longwave_scanner", "module.trade_beacon"]
+  },
+  "unique_passive": { "id": "passive.low_mass_frame", "effect": "reduced_steering_lag", "value": 0.12 },
+  "limitations": ["low_cargo_mass", "fragile_hull", "limited_long_duration_cooling"],
+  "cosmetic_slots": ["paint", "decal", "running_lights", "engine_trail", "antenna_profile"],
+  "lore": "Courier hulls are built for urgent deliveries through dangerous corridors. Their pilots learn that speed does not remove the cost of a mistake.",
+  "maintenance_profile": { "repair_cost_factor": 1.2, "preferred_service_tags": ["light_ship", "courier_network"] }
+}

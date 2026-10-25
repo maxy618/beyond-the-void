@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "content_id": "item.saltglass_shard",
+  "content_version": "1.0.0",
+  "display_name": "Saltglass Shard",
+  "category": "raw_material",
+  "stack_limit": 99,
+  "mass_kg": 0.15,
+  "base_value": 12,
+  "tags": ["mineral", "conductive_when_wet", "coastal", "crafting_input"],
+  "description": "A translucent mineral whose surface retains a thin, faintly luminous film of salt. When wet, its crystalline structure conducts a small, predictable charge.",
+  "source_methods": ["gather.node.saltglass", "trade.market.coast", "quest.reward.salt_signal"],
+  "processing_recipes": ["recipe.saltglass_laminate"],
+  "market_profile": {
+    "supply_region": "region.salt_coast",
+    "price_volatility": 0.18,
+    "legal_status": "common",
+    "storage_tags": ["dry_storage_preferred"]
+  },
+  "icon": "res://assets/icons/items/saltglass_shard.svg"
+}
