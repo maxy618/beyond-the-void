@@ -1,0 +1,31 @@
+{
+	"content_version": "0.1.0",
+	"counts": {
+		"buildings": 4,
+		"dialogues": 1,
+		"ecologies": 1,
+		"hulls": 4,
+		"items": 16,
+		"markets": 1,
+		"multitool_modes": 3,
+		"planets": 5,
+		"quests": 2,
+		"recipes": 10,
+		"settlements": 1,
+		"ship_modules": 6,
+		"species": 24,
+		"systems": 2
+	},
+	"duration_ms": 13,
+	"engine_version": "4.7.2-stable (official)",
+	"errors": [],
+	"generated_at_unix": 1793027776,
+	"generator_version": 1,
+	"ok": true,
+	"pack_id": "btv.core",
+	"pack_schema_version": 1,
+	"schema_version": 1,
+	"warnings": [
+		"dialogue.npc.kasa contains a dialogue loop through start -> relay -> relay_how (allowed for navigation)"
+	]
+}

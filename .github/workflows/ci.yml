@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main, overhaul/procedural-universe]
+  pull_request:
+
+env:
+  GODOT_VERSION: 4.7.2-stable
+  GODOT_BIN: Godot_v4.7.2-stable_linux.x86_64
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Godot
+        run: |
+          curl -fsSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip"
+          unzip -q godot.zip
+          chmod +x "$GODOT_BIN"
+
+      - name: Import project
+        run: ./"$GODOT_BIN" --headless --path . --import
+
+      - name: Domain and integration tests
+        run: ./"$GODOT_BIN" --headless --path . --script res://tests/run_tests.gd
+
+      - name: Content validation
+        run: ./"$GODOT_BIN" --headless --path . --script res://tools/validate_content.gd
+
+      - name: Generation stress
+        run: ./"$GODOT_BIN" --headless --path . --script res://tools/generation_stress.gd
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            build/reports/*.json
+            build/reports/*.xml
+            build/reports/*.log
+          if-no-files-found: warn

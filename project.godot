@@ -10,14 +10,40 @@ config_version=5
 
 [application]
 
-config/name="Новый игровой проект"
+config/name="Beyond the Void"
+config/description="A quiet science-fiction journey through signal, ecology and memory."
+run/main_scene="res://scenes/main.tscn"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "Mobile")
+boot_splash/bg_color=Color(0.027, 0.043, 0.071, 1)
 config/icon="res://icon.svg"
+
+[autoload]
+
+MCPGameBridge="res://addons/godot_mcp/game_bridge/mcp_game_bridge.gd"
 
 [display]
 
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/size/window_width_override=540
+window/size/window_height_override=960
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/handheld/orientation=1
+window/size/min_width=360
+window/size/min_height=640
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_mcp/plugin.cfg")
+
+[godot_mcp]
+
+bind_mode=0
+custom_bind_ip=""
+port_override_enabled=false
+port_override=6550
 
 [physics]
 
@@ -25,5 +51,8 @@ window/stretch/aspect="expand"
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.027, 0.043, 0.071, 1)
+renderer/rendering_method.windows="mobile"
+renderer/rendering_device/driver.windows="d3d12"

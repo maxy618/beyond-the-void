@@ -1,0 +1,205 @@
+{
+    "schema_version":  1,
+    "pack_id":  "btv.core",
+    "content_version":  "0.1.0",
+    "game_min_version":  "0.1.0",
+    "generator_version":  1,
+    "files":  [
+                  {
+                      "path":  "items/items.json",
+                      "type":  "items",
+                      "added_ids":  [
+                                        "item.crystal_fiber",
+                                        "item.saltglass_shard",
+                                        "item.insulated_fiber",
+                                        "item.signal_lens",
+                                        "item.alloy_plate",
+                                        "item.purified_water",
+                                        "item.ration_pack",
+                                        "item.spore_pod",
+                                        "item.mist_sample",
+                                        "item.repair_kit",
+                                        "item.fiber_weave",
+                                        "item.resin_sealant",
+                                        "item.conductive_gel",
+                                        "item.landing_clamp",
+                                        "item.signal_flare",
+                                        "item.mira_photo"
+                                    ]
+                  },
+                  {
+                      "path":  "recipes/recipes.json",
+                      "type":  "recipes",
+                      "added_ids":  [
+                                        "recipe.refine.insulated_fiber",
+                                        "recipe.refine.alloy_plate",
+                                        "recipe.craft.signal_lens",
+                                        "recipe.refine.fiber_weave",
+                                        "recipe.refine.resin_sealant",
+                                        "recipe.craft.repair_kit",
+                                        "recipe.refine.conductive_gel",
+                                        "recipe.craft.signal_flare",
+                                        "recipe.craft.landing_clamp",
+                                        "recipe.craft.field_ration"
+                                    ]
+                  },
+                  {
+                      "path":  "species/flora.json",
+                      "type":  "flora",
+                      "added_ids":  [
+                                        "species.flora.saltreed",
+                                        "species.flora.glassbell",
+                                        "species.flora.mistmoss",
+                                        "species.flora.lumen_kelp",
+                                        "species.flora.ash_orchid",
+                                        "species.flora.tide_heather",
+                                        "species.flora.pale_fungus",
+                                        "species.flora.crystal_thistle",
+                                        "species.flora.veil_fern",
+                                        "species.flora.silent_bulb",
+                                        "species.flora.drowned_reed",
+                                        "species.flora.star_cactus"
+                                    ]
+                  },
+                  {
+                      "path":  "species/fauna.json",
+                      "type":  "fauna",
+                      "added_ids":  [
+                                        "species.fauna.mist_manta",
+                                        "species.fauna.tide_grazer",
+                                        "species.fauna.shell_crawler",
+                                        "species.fauna.glasswing",
+                                        "species.fauna.echo_moth",
+                                        "species.fauna.salt_fox",
+                                        "species.fauna.reef_singer",
+                                        "species.fauna.ash_heron",
+                                        "species.fauna.mote_swarm",
+                                        "species.fauna.hollow_crab",
+                                        "species.fauna.night_drifter",
+                                        "species.fauna.stilt_walker"
+                                    ]
+                  },
+                  {
+                      "path":  "species/ecologies.json",
+                      "type":  "ecologies",
+                      "added_ids":  [
+                                        "ecology.vela.mist_coast"
+                                    ]
+                  },
+                  {
+                      "path":  "world/systems.json",
+                      "type":  "systems",
+                      "added_ids":  [
+                                        "system.ashfall_gate",
+                                        "system.threshold"
+                                    ]
+                  },
+                  {
+                      "path":  "world/planets.json",
+                      "type":  "planets",
+                      "added_ids":  [
+                                        "planet.vela",
+                                        "planet.brine",
+                                        "planet.cinder",
+                                        "planet.tallow",
+                                        "planet.threshold_anchor"
+                                    ]
+                  },
+                  {
+                      "path":  "world/settlements.json",
+                      "type":  "settlements",
+                      "added_ids":  [
+                                        "settlement.vela.landing"
+                                    ]
+                  },
+                  {
+                      "path":  "economy/markets.json",
+                      "type":  "markets",
+                      "added_ids":  [
+                                        "market.vela.coast"
+                                    ]
+                  },
+                  {
+                      "path":  "ships/hulls.json",
+                      "type":  "hulls",
+                      "added_ids":  [
+                                        "ship.hull.salt_skiff",
+                                        "ship.hull.photon_courier",
+                                        "ship.hull.deep_keel",
+                                        "ship.hull.glass_wren"
+                                    ]
+                  },
+                  {
+                      "path":  "ships/modules.json",
+                      "type":  "ship_modules",
+                      "added_ids":  [
+                                        "ship.module.scan_array",
+                                        "ship.module.ion_fins",
+                                        "ship.module.cargo_pods",
+                                        "ship.module.long_jump_coil",
+                                        "ship.module.heat_sink",
+                                        "ship.module.landing_clamps"
+                                    ]
+                  },
+                  {
+                      "path":  "buildings/modules.json",
+                      "type":  "buildings",
+                      "added_ids":  [
+                                        "build.power_cell",
+                                        "build.smelter",
+                                        "build.habitat",
+                                        "build.signal_mast"
+                                    ]
+                  },
+                  {
+                      "path":  "tech/multitool_modes.json",
+                      "type":  "multitool_modes",
+                      "added_ids":  [
+                                        "mode.scan",
+                                        "mode.sample",
+                                        "mode.dampen"
+                                    ]
+                  },
+                  {
+                      "path":  "missions/quests.json",
+                      "type":  "quests",
+                      "added_ids":  [
+                                        "quest.main.prologue.signal",
+                                        "quest.side.kasa_garden"
+                                    ]
+                  },
+                  {
+                      "path":  "dialogue/dialogues.json",
+                      "type":  "dialogues",
+                      "added_ids":  [
+                                        "dialogue.npc.kasa"
+                                    ]
+                  }
+              ],
+    "localization":  [
+                         {
+                             "locale":  "en",
+                             "path":  "localization/en/dialogue.json"
+                         },
+                         {
+                             "locale":  "en",
+                             "path":  "localization/en/items_recipes.json"
+                         },
+                         {
+                             "locale":  "en",
+                             "path":  "localization/en/species_fauna.json"
+                         },
+                         {
+                             "locale":  "en",
+                             "path":  "localization/en/species_flora.json"
+                         },
+                         {
+                             "locale":  "en",
+                             "path":  "localization/en/ui.json"
+                         },
+                         {
+                             "locale":  "en",
+                             "path":  "localization/en/world.json"
+                         }
+                     ]
+}

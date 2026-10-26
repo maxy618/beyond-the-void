@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "dialogue.npc.kasa",
+      "speaker_key": "dialogue.npc.kasa.speaker",
+      "entry_node": "start",
+      "nodes": {
+        "start": {
+          "text_key": "dialogue.npc.kasa.start",
+          "choices": [
+            {
+              "id": "ask_signal",
+              "text_key": "dialogue.npc.kasa.choice.ask_signal",
+              "conditions": [],
+              "effects": [],
+              "next": "relay"
+            },
+            {
+              "id": "ask_garden",
+              "text_key": "dialogue.npc.kasa.choice.ask_garden",
+              "conditions": [],
+              "effects": [
+                {"type": "set_flag", "id": "flag.kasa_garden_asked"},
+                {"type": "start_quest", "id": "quest.side.kasa_garden"},
+                {"type": "add_journal", "key": "quest.side.kasa_garden.journal.listen"}
+              ],
+              "next": "garden"
+            },
+            {
+              "id": "fit_lens",
+              "text_key": "dialogue.npc.kasa.choice.fit_lens",
+              "conditions": [
+                {"type": "has_item", "id": "item.signal_lens", "count": 1},
+                {"type": "not_flag", "id": "flag.lens_calibrated"}
+              ],
+              "effects": [
+                {"type": "set_flag", "id": "flag.lens_calibrated"},
+                {"type": "add_journal", "key": "journal.kasa.calibration"}
+              ],
+              "next": "calibrated"
+            },
+            {
+              "id": "leave",
+              "text_key": "dialogue.npc.kasa.choice.leave",
+              "conditions": [],
+              "effects": [],
+              "next": null
+            }
+          ]
+        },
+        "relay": {
+          "text_key": "dialogue.npc.kasa.relay",
+          "choices": [
+            {
+              "id": "relay_how",
+              "text_key": "dialogue.npc.kasa.choice.relay_how",
+              "conditions": [],
+              "effects": [],
+              "next": "relay_how"
+            },
+            {
+              "id": "relay_back",
+              "text_key": "dialogue.npc.kasa.choice.back",
+              "conditions": [],
+              "effects": [],
+              "next": "start"
+            }
+          ]
+        },
+        "relay_how": {
+          "text_key": "dialogue.npc.kasa.relay_how",
+          "choices": [
+            {
+              "id": "relay_how_back",
+              "text_key": "dialogue.npc.kasa.choice.back",
+              "conditions": [],
+              "effects": [],
+              "next": "relay"
+            }
+          ]
+        },
+        "garden": {
+          "text_key": "dialogue.npc.kasa.garden",
+          "choices": [
+            {
+              "id": "garden_back",
+              "text_key": "dialogue.npc.kasa.choice.back",
+              "conditions": [],
+              "effects": [],
+              "next": "start"
+            }
+          ]
+        },
+        "calibrated": {
+          "text_key": "dialogue.npc.kasa.calibrated",
+          "choices": [
+            {
+              "id": "calibrated_close",
+              "text_key": "dialogue.npc.kasa.choice.close",
+              "conditions": [],
+              "effects": [],
+              "next": null
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

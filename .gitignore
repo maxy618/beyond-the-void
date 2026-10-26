@@ -2,7 +2,6 @@
 .godot/
 .import/
 export.cfg
-export_presets.cfg
 
 # IDE and editor
 .vscode/
@@ -23,3 +22,15 @@ Desktop.ini
 .env
 .env.*
 !.env.example
+*.keystore
+
+# Build outputs (evidence reports and screenshots stay tracked)
+build/android/*.apk
+build/android/*.aab
+build/cache/
+
+# Locally installed third-party editor addon
+addons/godot_mcp/
+
+# Agent tooling state
+.serena/

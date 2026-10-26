@@ -1,0 +1,17 @@
+{
+	"average_ms": 0.484,
+	"duration_ms": 242,
+	"engine_version": "4.7.2-stable (official)",
+	"failed_seeds": [],
+	"generated_at_unix": 1793027776,
+	"generator_version": 1,
+	"nodes_generated": 9000,
+	"planet_id": "planet.vela",
+	"schema_version": 1,
+	"seed_base": 100000,
+	"seed_count": 500,
+	"seeds_failed": 0,
+	"seeds_passed": 500,
+	"slowest_seed": 100406,
+	"slowest_seed_ms": 2
+}

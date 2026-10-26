@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "quest.main.prologue.signal",
+      "type": "main",
+      "title_key": "quest.main.prologue.signal.title",
+      "summary_key": "quest.main.prologue.signal.summary",
+      "auto_start": true,
+      "start_conditions": [],
+      "steps": [
+        {
+          "id": "surface",
+          "title_key": "quest.main.prologue.signal.step.surface",
+          "objective": {"type": "enter_location", "id": "planet.vela.surface"},
+          "journal_key": "quest.main.prologue.signal.journal.surface"
+        },
+        {
+          "id": "witness",
+          "title_key": "quest.main.prologue.signal.step.witness",
+          "objective": {"type": "observe_species", "count": 2},
+          "journal_key": "quest.main.prologue.signal.journal.witness"
+        },
+        {
+          "id": "salvage",
+          "title_key": "quest.main.prologue.signal.step.salvage",
+          "objective": {"type": "collect_item", "id": "item.crystal_fiber", "count": 2},
+          "journal_key": "quest.main.prologue.signal.journal.salvage"
+        },
+        {
+          "id": "craft_lens",
+          "title_key": "quest.main.prologue.signal.step.craft_lens",
+          "objective": {"type": "craft_recipe", "id": "recipe.craft.signal_lens"},
+          "journal_key": "quest.main.prologue.signal.journal.craft_lens"
+        },
+        {
+          "id": "talk_kasa",
+          "title_key": "quest.main.prologue.signal.step.talk_kasa",
+          "objective": {"type": "speak_to_npc", "id": "dialogue.npc.kasa"},
+          "journal_key": "quest.main.prologue.signal.journal.talk_kasa"
+        },
+        {
+          "id": "relay",
+          "title_key": "quest.main.prologue.signal.step.relay",
+          "objective": {"type": "interact_object", "id": "object.relay_console", "action": "restore_power"},
+          "journal_key": "quest.main.prologue.signal.journal.relay"
+        }
+      ],
+      "rewards": {
+        "credits": 85,
+        "items": [{"item_id": "item.saltglass_shard", "count": 2}],
+        "flags": ["flag.prologue_beacon_lit"],
+        "journal_key": "quest.main.prologue.signal.journal.complete",
+        "idempotency_key": "reward.quest.main.prologue.signal.v1"
+      },
+      "journal_entries": [
+        "quest.main.prologue.signal.journal.surface",
+        "quest.main.prologue.signal.journal.witness",
+        "quest.main.prologue.signal.journal.salvage",
+        "quest.main.prologue.signal.journal.craft_lens",
+        "quest.main.prologue.signal.journal.talk_kasa",
+        "quest.main.prologue.signal.journal.relay",
+        "quest.main.prologue.signal.journal.complete"
+      ],
+      "failure_policy": "retryable",
+      "content_dependencies": ["item.crystal_fiber", "item.saltglass_shard", "item.signal_lens", "recipe.craft.signal_lens", "dialogue.npc.kasa"]
+    },
+    {
+      "content_id": "quest.side.kasa_garden",
+      "type": "side",
+      "title_key": "quest.side.kasa_garden.title",
+      "summary_key": "quest.side.kasa_garden.summary",
+      "auto_start": false,
+      "start_conditions": [{"type": "flag", "id": "flag.kasa_garden_asked"}],
+      "steps": [
+        {
+          "id": "listen",
+          "title_key": "quest.side.kasa_garden.step.listen",
+          "objective": {"type": "speak_to_npc", "id": "dialogue.npc.kasa"},
+          "journal_key": "quest.side.kasa_garden.journal.listen"
+        },
+        {
+          "id": "count",
+          "title_key": "quest.side.kasa_garden.step.count",
+          "objective": {"type": "observe_species", "count": 3},
+          "journal_key": "quest.side.kasa_garden.journal.count"
+        }
+      ],
+      "rewards": {
+        "credits": 40,
+        "items": [{"item_id": "item.fiber_weave", "count": 1}],
+        "flags": ["flag.kasa_garden_counted"],
+        "journal_key": "quest.side.kasa_garden.journal.complete",
+        "idempotency_key": "reward.quest.side.kasa_garden.v1"
+      },
+      "journal_entries": ["quest.side.kasa_garden.journal.listen", "quest.side.kasa_garden.journal.count", "quest.side.kasa_garden.journal.complete"],
+      "failure_policy": "retryable",
+      "content_dependencies": ["dialogue.npc.kasa"]
+    }
+  ]
+}

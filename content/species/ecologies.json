@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "ecology.vela.mist_coast",
+      "display_key": "ecology.vela.mist_coast.name",
+      "planet_id": "planet.vela",
+      "summary_key": "ecology.vela.mist_coast.summary",
+      "species": [
+        "species.flora.saltreed",
+        "species.flora.glassbell",
+        "species.flora.mistmoss",
+        "species.flora.lumen_kelp",
+        "species.flora.veil_fern",
+        "species.flora.tide_heather",
+        "species.fauna.mist_manta",
+        "species.fauna.tide_grazer",
+        "species.fauna.shell_crawler",
+        "species.fauna.glasswing",
+        "species.fauna.echo_moth",
+        "species.fauna.reef_singer"
+      ],
+      "health_notes": [
+        "No species is a resource first. Each is a neighbour with a recovery time.",
+        "Gathering lowers local population until the ecology regenerates."
+      ]
+    }
+  ]
+}

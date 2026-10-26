@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "system.ashfall_gate",
+      "display_key": "system.ashfall_gate.name",
+      "star_color": "#e8b06a",
+      "star_radius": 110,
+      "planet_ids": ["planet.vela", "planet.brine", "planet.cinder", "planet.tallow"],
+      "links": ["system.threshold"],
+      "description_key": "system.ashfall_gate.desc",
+      "danger": "low"
+    },
+    {
+      "content_id": "system.threshold",
+      "display_key": "system.threshold.name",
+      "star_color": "#a7c7d9",
+      "star_radius": 95,
+      "planet_ids": ["planet.threshold_anchor"],
+      "links": ["system.ashfall_gate"],
+      "description_key": "system.threshold.desc",
+      "danger": "moderate"
+    }
+  ]
+}

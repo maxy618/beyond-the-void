@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "build.power_cell",
+      "display_key": "build.power_cell.name",
+      "description_key": "build.power_cell.desc",
+      "cost": {
+        "credits": 40,
+        "items": [
+          {"item_id": "item.alloy_plate", "count": 1},
+          {"item_id": "item.saltglass_shard", "count": 2}
+        ]
+      },
+      "power_production": 6,
+      "power_draw": 0,
+      "effect": {"type": "power", "value": 6},
+      "production": null
+    },
+    {
+      "content_id": "build.smelter",
+      "display_key": "build.smelter.name",
+      "description_key": "build.smelter.desc",
+      "cost": {
+        "credits": 30,
+        "items": [
+          {"item_id": "item.alloy_plate", "count": 1},
+          {"item_id": "item.crystal_fiber", "count": 1}
+        ]
+      },
+      "power_production": 0,
+      "power_draw": 4,
+      "effect": {"type": "production", "value": 1},
+      "production": {
+        "cycle_seconds": 20,
+        "input": {"item_id": "item.saltglass_shard", "count": 1},
+        "output": {"item_id": "item.alloy_plate", "count": 1}
+      }
+    },
+    {
+      "content_id": "build.habitat",
+      "display_key": "build.habitat.name",
+      "description_key": "build.habitat.desc",
+      "cost": {
+        "credits": 50,
+        "items": [
+          {"item_id": "item.alloy_plate", "count": 2},
+          {"item_id": "item.fiber_weave", "count": 1}
+        ]
+      },
+      "power_production": 0,
+      "power_draw": 1,
+      "effect": {"type": "crew_capacity", "value": 2},
+      "production": null
+    },
+    {
+      "content_id": "build.signal_mast",
+      "display_key": "build.signal_mast.name",
+      "description_key": "build.signal_mast.desc",
+      "cost": {
+        "credits": 90,
+        "items": [
+          {"item_id": "item.alloy_plate", "count": 2},
+          {"item_id": "item.signal_lens", "count": 1}
+        ]
+      },
+      "power_production": 0,
+      "power_draw": 2,
+      "effect": {"type": "scan_bonus", "value": 2},
+      "production": null
+    }
+  ]
+}

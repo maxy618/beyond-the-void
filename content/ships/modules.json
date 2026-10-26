@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "ship.module.scan_array",
+      "display_key": "ship.module.scan_array.name",
+      "description_key": "ship.module.scan_array.desc",
+      "slot": "utility",
+      "mass_kg": 8,
+      "power_draw": 4,
+      "heat": 1,
+      "effects": {"scan_range": 20},
+      "compatibility_tags": ["sensor", "civilian"]
+    },
+    {
+      "content_id": "ship.module.ion_fins",
+      "display_key": "ship.module.ion_fins.name",
+      "description_key": "ship.module.ion_fins.desc",
+      "slot": "engine",
+      "mass_kg": 18,
+      "power_draw": 8,
+      "heat": 3,
+      "effects": {"maneuver": 0.15, "top_speed": 0.1},
+      "compatibility_tags": ["ion", "civilian"]
+    },
+    {
+      "content_id": "ship.module.cargo_pods",
+      "display_key": "ship.module.cargo_pods.name",
+      "description_key": "ship.module.cargo_pods.desc",
+      "slot": "utility",
+      "mass_kg": 22,
+      "power_draw": 2,
+      "heat": 0,
+      "effects": {"cargo_mass": 45, "maneuver": -0.1},
+      "compatibility_tags": ["cargo", "civilian"]
+    },
+    {
+      "content_id": "ship.module.long_jump_coil",
+      "display_key": "ship.module.long_jump_coil.name",
+      "description_key": "ship.module.long_jump_coil.desc",
+      "slot": "utility",
+      "mass_kg": 26,
+      "power_draw": 10,
+      "heat": 4,
+      "effects": {"jump_range": 1},
+      "compatibility_tags": ["jump", "civilian"]
+    },
+    {
+      "content_id": "ship.module.heat_sink",
+      "display_key": "ship.module.heat_sink.name",
+      "description_key": "ship.module.heat_sink.desc",
+      "slot": "utility",
+      "mass_kg": 12,
+      "power_draw": 2,
+      "heat": -2,
+      "effects": {"thermal": 0.2},
+      "compatibility_tags": ["thermal", "civilian"]
+    },
+    {
+      "content_id": "ship.module.landing_clamps",
+      "display_key": "ship.module.landing_clamps.name",
+      "description_key": "ship.module.landing_clamps.desc",
+      "slot": "utility",
+      "mass_kg": 14,
+      "power_draw": 3,
+      "heat": 0,
+      "effects": {"landing": 0.15},
+      "compatibility_tags": ["landing", "atmospheric"]
+    }
+  ]
+}

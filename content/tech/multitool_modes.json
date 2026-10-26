@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "mode.scan",
+      "display_key": "mode.scan.name",
+      "description_key": "mode.scan.desc",
+      "action": "observe",
+      "range_m": 18,
+      "energy_draw": 1,
+      "ethical_note_key": "mode.scan.ethics"
+    },
+    {
+      "content_id": "mode.sample",
+      "display_key": "mode.sample.name",
+      "description_key": "mode.sample.desc",
+      "action": "gather",
+      "range_m": 8,
+      "energy_draw": 2,
+      "ethical_note_key": "mode.sample.ethics"
+    },
+    {
+      "content_id": "mode.dampen",
+      "display_key": "mode.dampen.name",
+      "description_key": "mode.dampen.desc",
+      "action": "calm",
+      "range_m": 12,
+      "energy_draw": 2,
+      "ethical_note_key": "mode.dampen.ethics"
+    }
+  ]
+}

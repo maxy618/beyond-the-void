@@ -1,0 +1,13 @@
+{
+  "mcp": {
+    "servers": {
+      "godot-lsp": {
+        "type": "local",
+        "command": [
+          "npx",
+          "@ryanmazzolini/minimal-godot-mcp"
+        ]
+      }
+    }
+  }
+}

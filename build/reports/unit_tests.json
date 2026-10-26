@@ -1,0 +1,616 @@
+{
+	"abort_reason": "",
+	"duration_ms": 1330,
+	"engine_version": "4.7.2-stable (official)",
+	"failed": 0,
+	"generated_at_unix": 1793027051,
+	"passed": 67,
+	"project": "res://project.godot",
+	"results": [
+		{
+			"assertions": 111,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_content.gd",
+			"test": "test_core_localization_present"
+		},
+		{
+			"assertions": 64,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_content.gd",
+			"test": "test_cross_references_resolve"
+		},
+		{
+			"assertions": 17,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_content.gd",
+			"test": "test_manifest_matches_loaded_files"
+		},
+		{
+			"assertions": 9,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_content.gd",
+			"test": "test_pack_loads_and_counts"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_content.gd",
+			"test": "test_unknown_ids_are_safe"
+		},
+		{
+			"assertions": 2,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_content.gd",
+			"test": "test_validator_rejects_broken_value"
+		},
+		{
+			"assertions": 1,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_content.gd",
+			"test": "test_validator_rejects_missing_localization"
+		},
+		{
+			"assertions": 2,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_inventory_crafting.gd",
+			"test": "test_add_many_is_atomic"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_inventory_crafting.gd",
+			"test": "test_craft_consumes_inputs_and_adds_output"
+		},
+		{
+			"assertions": 2,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_inventory_crafting.gd",
+			"test": "test_duplicate_inventory_is_independent"
+		},
+		{
+			"assertions": 2,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_inventory_crafting.gd",
+			"test": "test_failed_craft_rolls_back"
+		},
+		{
+			"assertions": 9,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_inventory_crafting.gd",
+			"test": "test_inventory_add_remove_and_mass"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_inventory_crafting.gd",
+			"test": "test_inventory_capacity_is_enforced"
+		},
+		{
+			"assertions": 2,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_inventory_crafting.gd",
+			"test": "test_missing_inputs_do_not_mutate"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_inventory_crafting.gd",
+			"test": "test_observation_gated_recipe"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_inventory_crafting.gd",
+			"test": "test_stack_limit_is_enforced"
+		},
+		{
+			"assertions": 6,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_market.gd",
+			"test": "test_buy_moves_stock_and_credits"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_market.gd",
+			"test": "test_buy_without_capacity_does_not_mutate"
+		},
+		{
+			"assertions": 2,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_market.gd",
+			"test": "test_buy_without_credits_does_not_mutate"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_market.gd",
+			"test": "test_market_state_roundtrip"
+		},
+		{
+			"assertions": 33,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_market.gd",
+			"test": "test_prices_are_bounded_integers"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_market.gd",
+			"test": "test_restock_moves_toward_target"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_market.gd",
+			"test": "test_sell_moves_stock_and_credits"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_market.gd",
+			"test": "test_stock_is_finite"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_market.gd",
+			"test": "test_unlisted_sale_and_invalid_quantity"
+		},
+		{
+			"assertions": 5,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_ecology.gd",
+			"test": "test_absent_species_rejected"
+		},
+		{
+			"assertions": 5,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_ecology.gd",
+			"test": "test_calm_is_nonlethal"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_ecology.gd",
+			"test": "test_fauna_cannot_be_gathered"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_ecology.gd",
+			"test": "test_gather_capacity_failure_keeps_population"
+		},
+		{
+			"assertions": 5,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_ecology.gd",
+			"test": "test_gather_reduces_local_population_and_recovers"
+		},
+		{
+			"assertions": 8,
+			"category": "unit",
+			"duration_ms": 3,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_ecology.gd",
+			"test": "test_gather_requires_sample_mode_and_node"
+		},
+		{
+			"assertions": 7,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_ecology.gd",
+			"test": "test_observe_requires_planet_and_mode"
+		},
+		{
+			"assertions": 5,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_ecology.gd",
+			"test": "test_observe_twice_counts_without_harm"
+		},
+		{
+			"assertions": 6,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_quest_dialogue.gd",
+			"test": "test_dialogue_rechecks_conditions_at_commit"
+		},
+		{
+			"assertions": 11,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_quest_dialogue.gd",
+			"test": "test_main_quest_is_ordered_and_rewarded_once"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_quest_dialogue.gd",
+			"test": "test_ordered_steps_do_not_skip"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_quest_dialogue.gd",
+			"test": "test_receipt_survives_save_roundtrip"
+		},
+		{
+			"assertions": 13,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_quest_dialogue.gd",
+			"test": "test_side_quest_dialogue_starts_and_completes"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_quest_dialogue.gd",
+			"test": "test_unknown_quest_and_dialogue_are_safe"
+		},
+		{
+			"assertions": 8,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_build_consumes_costs_and_powers_base"
+		},
+		{
+			"assertions": 6,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_build_failure_does_not_charge"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_build_requires_planet_and_valid_slot"
+		},
+		{
+			"assertions": 9,
+			"category": "unit",
+			"duration_ms": 3,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_powered_smelter_produces_atomically"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_production_without_input_changes_nothing"
+		},
+		{
+			"assertions": 5,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_ship_default_loadout_and_stats"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_ship_equip_changes_capacity"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_ship_rejects_unowned_incompatible_and_full_slots"
+		},
+		{
+			"assertions": 7,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_travel_checks_and_consumes_fuel"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_build_ship.gd",
+			"test": "test_unequip_checks_cargo_capacity"
+		},
+		{
+			"assertions": 7,
+			"category": "unit",
+			"duration_ms": 43,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_save.gd",
+			"test": "test_backup_survives_corrupt_primary"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 13,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_save.gd",
+			"test": "test_corrupt_all_sources_reports_failure"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 16,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_save.gd",
+			"test": "test_duplicate_reward_is_blocked_after_reload"
+		},
+		{
+			"assertions": 19,
+			"category": "unit",
+			"duration_ms": 18,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_save.gd",
+			"test": "test_full_state_roundtrip"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 29,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_save.gd",
+			"test": "test_missing_content_is_rejected_without_apply"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 17,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_save.gd",
+			"test": "test_newer_schema_is_rejected"
+		},
+		{
+			"assertions": 5,
+			"category": "unit",
+			"duration_ms": 10,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_save.gd",
+			"test": "test_save_reports_backup_on_second_write"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 25,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_save.gd",
+			"test": "test_temp_save_recovers_interrupted_write"
+		},
+		{
+			"assertions": 9,
+			"category": "unit",
+			"duration_ms": 13,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_save.gd",
+			"test": "test_v1_migration"
+		},
+		{
+			"assertions": 1,
+			"category": "unit",
+			"duration_ms": 143,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_worldgen.gd",
+			"test": "test_500_seed_stress"
+		},
+		{
+			"assertions": 16,
+			"category": "unit",
+			"duration_ms": 2,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_worldgen.gd",
+			"test": "test_frontier_is_seeded_and_linked"
+		},
+		{
+			"assertions": 90,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_worldgen.gd",
+			"test": "test_nodes_avoid_anchors"
+		},
+		{
+			"assertions": 5,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_worldgen.gd",
+			"test": "test_start_and_ship_positions_match_anchors"
+		},
+		{
+			"assertions": 124,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_worldgen.gd",
+			"test": "test_surface_layout_contains_valid_nodes"
+		},
+		{
+			"assertions": 2,
+			"category": "unit",
+			"duration_ms": 3,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_worldgen.gd",
+			"test": "test_surface_layout_is_deterministic"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 5,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_worldgen.gd",
+			"test": "test_system_visual_and_starfield_are_stable"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_input.gd",
+			"test": "test_clear_releases_every_held_control"
+		},
+		{
+			"assertions": 3,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_input.gd",
+			"test": "test_move_vector_is_clamped"
+		}
+	],
+	"schema_version": 1,
+	"total": 67
+}

@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "recipe.refine.insulated_fiber",
+      "display_key": "recipe.refine.insulated_fiber.name",
+      "description_key": "recipe.refine.insulated_fiber.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 5,
+      "inputs": [{"item_id": "item.crystal_fiber", "count": 2}],
+      "outputs": [{"item_id": "item.insulated_fiber", "count": 1}],
+      "unlock": {"observations": []}
+    },
+    {
+      "content_id": "recipe.refine.alloy_plate",
+      "display_key": "recipe.refine.alloy_plate.name",
+      "description_key": "recipe.refine.alloy_plate.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 8,
+      "inputs": [
+        {"item_id": "item.saltglass_shard", "count": 2},
+        {"item_id": "item.crystal_fiber", "count": 1}
+      ],
+      "outputs": [{"item_id": "item.alloy_plate", "count": 1}],
+      "unlock": {"observations": []}
+    },
+    {
+      "content_id": "recipe.craft.signal_lens",
+      "display_key": "recipe.craft.signal_lens.name",
+      "description_key": "recipe.craft.signal_lens.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 10,
+      "inputs": [
+        {"item_id": "item.insulated_fiber", "count": 1},
+        {"item_id": "item.saltglass_shard", "count": 1}
+      ],
+      "outputs": [{"item_id": "item.signal_lens", "count": 1}],
+      "unlock": {"observations": []}
+    },
+    {
+      "content_id": "recipe.refine.fiber_weave",
+      "display_key": "recipe.refine.fiber_weave.name",
+      "description_key": "recipe.refine.fiber_weave.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 6,
+      "inputs": [{"item_id": "item.crystal_fiber", "count": 3}],
+      "outputs": [{"item_id": "item.fiber_weave", "count": 1}],
+      "unlock": {"observations": []}
+    },
+    {
+      "content_id": "recipe.refine.resin_sealant",
+      "display_key": "recipe.refine.resin_sealant.name",
+      "description_key": "recipe.refine.resin_sealant.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 6,
+      "inputs": [
+        {"item_id": "item.spore_pod", "count": 2},
+        {"item_id": "item.saltglass_shard", "count": 1}
+      ],
+      "outputs": [{"item_id": "item.resin_sealant", "count": 1}],
+      "unlock": {"observations": []}
+    },
+    {
+      "content_id": "recipe.craft.repair_kit",
+      "display_key": "recipe.craft.repair_kit.name",
+      "description_key": "recipe.craft.repair_kit.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 10,
+      "inputs": [
+        {"item_id": "item.fiber_weave", "count": 1},
+        {"item_id": "item.resin_sealant", "count": 1}
+      ],
+      "outputs": [{"item_id": "item.repair_kit", "count": 1}],
+      "unlock": {"observations": []}
+    },
+    {
+      "content_id": "recipe.refine.conductive_gel",
+      "display_key": "recipe.refine.conductive_gel.name",
+      "description_key": "recipe.refine.conductive_gel.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 8,
+      "inputs": [
+        {"item_id": "item.mist_sample", "count": 1},
+        {"item_id": "item.saltglass_shard", "count": 1}
+      ],
+      "outputs": [{"item_id": "item.conductive_gel", "count": 1}],
+      "unlock": {"observations": ["species.fauna.mist_manta"]}
+    },
+    {
+      "content_id": "recipe.craft.signal_flare",
+      "display_key": "recipe.craft.signal_flare.name",
+      "description_key": "recipe.craft.signal_flare.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 5,
+      "inputs": [
+        {"item_id": "item.resin_sealant", "count": 1},
+        {"item_id": "item.fiber_weave", "count": 1}
+      ],
+      "outputs": [{"item_id": "item.signal_flare", "count": 2}],
+      "unlock": {"observations": []}
+    },
+    {
+      "content_id": "recipe.craft.landing_clamp",
+      "display_key": "recipe.craft.landing_clamp.name",
+      "description_key": "recipe.craft.landing_clamp.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 12,
+      "inputs": [
+        {"item_id": "item.alloy_plate", "count": 1},
+        {"item_id": "item.conductive_gel", "count": 1}
+      ],
+      "outputs": [{"item_id": "item.landing_clamp", "count": 1}],
+      "unlock": {"observations": ["species.flora.saltreed"]}
+    },
+    {
+      "content_id": "recipe.craft.field_ration",
+      "display_key": "recipe.craft.field_ration.name",
+      "description_key": "recipe.craft.field_ration.desc",
+      "station": "field_fabricator",
+      "duration_seconds": 4,
+      "inputs": [
+        {"item_id": "item.spore_pod", "count": 1},
+        {"item_id": "item.purified_water", "count": 1}
+      ],
+      "outputs": [{"item_id": "item.ration_pack", "count": 2}],
+      "unlock": {"observations": []}
+    }
+  ]
+}

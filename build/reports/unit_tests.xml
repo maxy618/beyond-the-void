@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="beyond-the-void" tests="67" failures="0">
+  <testsuite name="first-party" tests="67" failures="0">
+    <testcase classname="test_content" name="test_core_localization_present" time="0.000">
+    </testcase>
+    <testcase classname="test_content" name="test_cross_references_resolve" time="0.001">
+    </testcase>
+    <testcase classname="test_content" name="test_manifest_matches_loaded_files" time="0.000">
+    </testcase>
+    <testcase classname="test_content" name="test_pack_loads_and_counts" time="0.000">
+    </testcase>
+    <testcase classname="test_content" name="test_unknown_ids_are_safe" time="0.000">
+    </testcase>
+    <testcase classname="test_content" name="test_validator_rejects_broken_value" time="0.002">
+    </testcase>
+    <testcase classname="test_content" name="test_validator_rejects_missing_localization" time="0.001">
+    </testcase>
+    <testcase classname="test_inventory_crafting" name="test_add_many_is_atomic" time="0.001">
+    </testcase>
+    <testcase classname="test_inventory_crafting" name="test_craft_consumes_inputs_and_adds_output" time="0.001">
+    </testcase>
+    <testcase classname="test_inventory_crafting" name="test_duplicate_inventory_is_independent" time="0.000">
+    </testcase>
+    <testcase classname="test_inventory_crafting" name="test_failed_craft_rolls_back" time="0.000">
+    </testcase>
+    <testcase classname="test_inventory_crafting" name="test_inventory_add_remove_and_mass" time="0.000">
+    </testcase>
+    <testcase classname="test_inventory_crafting" name="test_inventory_capacity_is_enforced" time="0.000">
+    </testcase>
+    <testcase classname="test_inventory_crafting" name="test_missing_inputs_do_not_mutate" time="0.001">
+    </testcase>
+    <testcase classname="test_inventory_crafting" name="test_observation_gated_recipe" time="0.000">
+    </testcase>
+    <testcase classname="test_inventory_crafting" name="test_stack_limit_is_enforced" time="0.000">
+    </testcase>
+    <testcase classname="test_market" name="test_buy_moves_stock_and_credits" time="0.001">
+    </testcase>
+    <testcase classname="test_market" name="test_buy_without_capacity_does_not_mutate" time="0.001">
+    </testcase>
+    <testcase classname="test_market" name="test_buy_without_credits_does_not_mutate" time="0.000">
+    </testcase>
+    <testcase classname="test_market" name="test_market_state_roundtrip" time="0.000">
+    </testcase>
+    <testcase classname="test_market" name="test_prices_are_bounded_integers" time="0.001">
+    </testcase>
+    <testcase classname="test_market" name="test_restock_moves_toward_target" time="0.000">
+    </testcase>
+    <testcase classname="test_market" name="test_sell_moves_stock_and_credits" time="0.000">
+    </testcase>
+    <testcase classname="test_market" name="test_stock_is_finite" time="0.000">
+    </testcase>
+    <testcase classname="test_market" name="test_unlisted_sale_and_invalid_quantity" time="0.001">
+    </testcase>
+    <testcase classname="test_ecology" name="test_absent_species_rejected" time="0.002">
+    </testcase>
+    <testcase classname="test_ecology" name="test_calm_is_nonlethal" time="0.002">
+    </testcase>
+    <testcase classname="test_ecology" name="test_fauna_cannot_be_gathered" time="0.002">
+    </testcase>
+    <testcase classname="test_ecology" name="test_gather_capacity_failure_keeps_population" time="0.001">
+    </testcase>
+    <testcase classname="test_ecology" name="test_gather_reduces_local_population_and_recovers" time="0.002">
+    </testcase>
+    <testcase classname="test_ecology" name="test_gather_requires_sample_mode_and_node" time="0.003">
+    </testcase>
+    <testcase classname="test_ecology" name="test_observe_requires_planet_and_mode" time="0.000">
+    </testcase>
+    <testcase classname="test_ecology" name="test_observe_twice_counts_without_harm" time="0.001">
+    </testcase>
+    <testcase classname="test_quest_dialogue" name="test_dialogue_rechecks_conditions_at_commit" time="0.002">
+    </testcase>
+    <testcase classname="test_quest_dialogue" name="test_main_quest_is_ordered_and_rewarded_once" time="0.002">
+    </testcase>
+    <testcase classname="test_quest_dialogue" name="test_ordered_steps_do_not_skip" time="0.002">
+    </testcase>
+    <testcase classname="test_quest_dialogue" name="test_receipt_survives_save_roundtrip" time="0.002">
+    </testcase>
+    <testcase classname="test_quest_dialogue" name="test_side_quest_dialogue_starts_and_completes" time="0.002">
+    </testcase>
+    <testcase classname="test_quest_dialogue" name="test_unknown_quest_and_dialogue_are_safe" time="0.001">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_build_consumes_costs_and_powers_base" time="0.002">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_build_failure_does_not_charge" time="0.002">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_build_requires_planet_and_valid_slot" time="0.001">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_powered_smelter_produces_atomically" time="0.003">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_production_without_input_changes_nothing" time="0.002">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_ship_default_loadout_and_stats" time="0.000">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_ship_equip_changes_capacity" time="0.001">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_ship_rejects_unowned_incompatible_and_full_slots" time="0.000">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_travel_checks_and_consumes_fuel" time="0.001">
+    </testcase>
+    <testcase classname="test_build_ship" name="test_unequip_checks_cargo_capacity" time="0.000">
+    </testcase>
+    <testcase classname="test_save" name="test_backup_survives_corrupt_primary" time="0.043">
+    </testcase>
+    <testcase classname="test_save" name="test_corrupt_all_sources_reports_failure" time="0.013">
+    </testcase>
+    <testcase classname="test_save" name="test_duplicate_reward_is_blocked_after_reload" time="0.016">
+    </testcase>
+    <testcase classname="test_save" name="test_full_state_roundtrip" time="0.018">
+    </testcase>
+    <testcase classname="test_save" name="test_missing_content_is_rejected_without_apply" time="0.029">
+    </testcase>
+    <testcase classname="test_save" name="test_newer_schema_is_rejected" time="0.017">
+    </testcase>
+    <testcase classname="test_save" name="test_save_reports_backup_on_second_write" time="0.010">
+    </testcase>
+    <testcase classname="test_save" name="test_temp_save_recovers_interrupted_write" time="0.025">
+    </testcase>
+    <testcase classname="test_save" name="test_v1_migration" time="0.013">
+    </testcase>
+    <testcase classname="test_worldgen" name="test_500_seed_stress" time="0.143">
+    </testcase>
+    <testcase classname="test_worldgen" name="test_frontier_is_seeded_and_linked" time="0.002">
+    </testcase>
+    <testcase classname="test_worldgen" name="test_nodes_avoid_anchors" time="0.000">
+    </testcase>
+    <testcase classname="test_worldgen" name="test_start_and_ship_positions_match_anchors" time="0.001">
+    </testcase>
+    <testcase classname="test_worldgen" name="test_surface_layout_contains_valid_nodes" time="0.000">
+    </testcase>
+    <testcase classname="test_worldgen" name="test_surface_layout_is_deterministic" time="0.003">
+    </testcase>
+    <testcase classname="test_worldgen" name="test_system_visual_and_starfield_are_stable" time="0.005">
+    </testcase>
+    <testcase classname="test_input" name="test_clear_releases_every_held_control" time="0.000">
+    </testcase>
+    <testcase classname="test_input" name="test_move_vector_is_clamped" time="0.000">
+    </testcase>
+  </testsuite>
+</testsuites>

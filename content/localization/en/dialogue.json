@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "locale": "en",
+  "strings": {
+    "dialogue.npc.kasa.speaker": "Kasa",
+    "dialogue.npc.kasa.start": "You came down in the quiet hour. Most people wait for the tide to turn. Kasa looks at the skiff, then at the mud on your boots, and does not ask which one is worse.",
+    "dialogue.npc.kasa.choice.ask_signal": "\"I'm following a signal. My sister's.\"",
+    "dialogue.npc.kasa.choice.ask_garden": "\"What are you planting out here?\"",
+    "dialogue.npc.kasa.choice.fit_lens": "\"I have a lens. Can you calibrate it?\"",
+    "dialogue.npc.kasa.choice.leave": "\"Not now. I'll come back.\"",
+    "dialogue.npc.kasa.choice.relay_how": "\"How does the relay work?\"",
+    "dialogue.npc.kasa.choice.back": "\"Something else.\"",
+    "dialogue.npc.kasa.choice.close": "\"Thank you, Kasa.\"",
+    "dialogue.npc.kasa.relay": "The relay is older than the settlement. It used to pass weather and gossip between the outer stations. When the beacon network went dark, it kept listening. Kasa wipes her hands on a rag that has been clean for years. If your sister's signal touched it, the relay remembers the shape of her voice.",
+    "dialogue.npc.kasa.relay_how": "A lens focuses the carrier wave. The old one cracked when the tide took the east mast. I can calibrate a replacement, but I need to see it first. I won't tune a lens I can't hold.",
+    "dialogue.npc.kasa.garden": "The soil here is a liar. It holds for one season, then the tide takes it back. Kasa shows you a patch of stakes and string above the waterline. The seed packets are stamped with three different station names. I want to plant something that belongs here. Not something that survives by making everything else leave.",
+    "dialogue.npc.kasa.calibrated": "Kasa holds the lens to the light. She turns it once, twice, then taps it against the relay housing. The glass rings a note you feel in your teeth. There. It will hold a carrier wave now. She hands it back. The relay is north of the landing, past the third reed bank. Try not to wake the herons.",
+    "journal.kasa.calibration": "Kasa calibrated the lens against the relay's old frequency. She did not ask what Mira's voice sounded like."
+  }
+}

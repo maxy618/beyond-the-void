@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "settlement.vela.landing",
+      "display_key": "settlement.vela.landing.name",
+      "planet_id": "planet.vela",
+      "population": 23,
+      "culture": "tidekeepers",
+      "description_key": "settlement.vela.landing.desc",
+      "services": ["market", "repair", "rumor"]
+    }
+  ]
+}

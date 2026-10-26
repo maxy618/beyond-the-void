@@ -1,0 +1,22 @@
+{
+	"abort_reason": "",
+	"duration_ms": 1331,
+	"engine_version": "4.7.2-stable (official)",
+	"failed": 0,
+	"generated_at_unix": 1793027051,
+	"passed": 1,
+	"project": "res://project.godot",
+	"results": [
+		{
+			"assertions": 52,
+			"category": "integration",
+			"duration_ms": 21,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_e2e.gd",
+			"test": "test_vertical_slice_end_to_end"
+		}
+	],
+	"schema_version": 1,
+	"total": 1
+}

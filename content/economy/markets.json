@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "content_version": "1.0.0",
+  "records": [
+    {
+      "content_id": "market.vela.coast",
+      "display_key": "market.vela.coast.name",
+      "market_type": "settlement_exchange",
+      "settlement_id": "settlement.vela.landing",
+      "region": "region.vela_coast",
+      "currency": "credits",
+      "update_interval_seconds": 900,
+      "stock_model": {
+        "type": "finite_supply_demand",
+        "price_floor_factor": 0.55,
+        "price_ceiling_factor": 2.8,
+        "buy_fee": 0.05,
+        "sell_fee": 0.03,
+        "max_stock_factor": 3.0
+      },
+      "initial_stock": [
+        {"item_id": "item.saltglass_shard", "quantity": 18, "target_stock": 20, "production_per_cycle": 2, "consumption_per_cycle": 1},
+        {"item_id": "item.crystal_fiber", "quantity": 10, "target_stock": 12, "production_per_cycle": 1, "consumption_per_cycle": 1},
+        {"item_id": "item.ration_pack", "quantity": 12, "target_stock": 12, "production_per_cycle": 1, "consumption_per_cycle": 1},
+        {"item_id": "item.purified_water", "quantity": 8, "target_stock": 10, "production_per_cycle": 2, "consumption_per_cycle": 1},
+        {"item_id": "item.alloy_plate", "quantity": 3, "target_stock": 4, "production_per_cycle": 0.5, "consumption_per_cycle": 0.5},
+        {"item_id": "item.signal_lens", "quantity": 1, "target_stock": 1, "production_per_cycle": 0, "consumption_per_cycle": 0},
+        {"item_id": "item.repair_kit", "quantity": 2, "target_stock": 2, "production_per_cycle": 0, "consumption_per_cycle": 0},
+        {"item_id": "item.fiber_weave", "quantity": 4, "target_stock": 4, "production_per_cycle": 0, "consumption_per_cycle": 0},
+        {"item_id": "item.resin_sealant", "quantity": 3, "target_stock": 3, "production_per_cycle": 0, "consumption_per_cycle": 0},
+        {"item_id": "item.mist_sample", "quantity": 2, "target_stock": 2, "production_per_cycle": 0, "consumption_per_cycle": 0},
+        {"item_id": "item.signal_flare", "quantity": 5, "target_stock": 5, "production_per_cycle": 0, "consumption_per_cycle": 0}
+      ],
+      "demand_modifiers": [
+        {"tag": "crafting_input", "multiplier": 1.1},
+        {"tag": "food", "multiplier": 0.95},
+        {"tag": "research", "multiplier": 1.25},
+        {"tag": "signal", "multiplier": 1.2}
+      ],
+      "trade_rules": {
+        "min_quantity": 1,
+        "max_quantity": 99,
+        "atomic": true,
+        "sell_unlisted": false
+      },
+      "rumors": [
+        "The relay has been dark since the last spring tide.",
+        "Kasa trades lens glass for stories, but she checks the glass first."
+      ],
+      "player_facing_explanation_key": "market.vela.coast.explanation"
+    }
+  ]
+}

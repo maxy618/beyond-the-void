@@ -1,0 +1,262 @@
+{
+	"checks": 52,
+	"engine": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"ok": true,
+	"screenshots": [
+		"D:/beyond-the-void/build/reports/screenshots/01_title_720x1280.png",
+		"D:/beyond-the-void/build/reports/screenshots/02_space.png",
+		"D:/beyond-the-void/build/reports/screenshots/03_chart.png",
+		"D:/beyond-the-void/build/reports/screenshots/04_planet_tidebreak.png",
+		"D:/beyond-the-void/build/reports/screenshots/05_inventory.png",
+		"D:/beyond-the-void/build/reports/screenshots/06_craft.png",
+		"D:/beyond-the-void/build/reports/screenshots/07_observed.png",
+		"D:/beyond-the-void/build/reports/screenshots/08_market.png",
+		"D:/beyond-the-void/build/reports/screenshots/09_dialogue.png",
+		"D:/beyond-the-void/build/reports/screenshots/10_build.png",
+		"D:/beyond-the-void/build/reports/screenshots/11_ship.png",
+		"D:/beyond-the-void/build/reports/screenshots/12_journal.png",
+		"D:/beyond-the-void/build/reports/screenshots/13_settings.png",
+		"D:/beyond-the-void/build/reports/screenshots/14_pause.png",
+		"D:/beyond-the-void/build/reports/screenshots/15_planet_360x640.png",
+		"D:/beyond-the-void/build/reports/screenshots/16_planet_1080x2400.png"
+	],
+	"steps": [
+		{
+			"check": "content pack loaded",
+			"ok": true
+		},
+		{
+			"check": "title menu built",
+			"ok": true
+		},
+		{
+			"check": "screenshot 01_title_720x1280",
+			"ok": true
+		},
+		{
+			"check": "game screen starts",
+			"ok": true
+		},
+		{
+			"check": "new game begins in space",
+			"ok": true
+		},
+		{
+			"check": "world view present",
+			"ok": true
+		},
+		{
+			"check": "screenshot 02_space",
+			"ok": true
+		},
+		{
+			"check": "chart panel opens in space",
+			"ok": true
+		},
+		{
+			"check": "screenshot 03_chart",
+			"ok": true
+		},
+		{
+			"check": "land on Vela",
+			"ok": true
+		},
+		{
+			"check": "planet mode after landing",
+			"ok": true
+		},
+		{
+			"check": "screenshot 04_planet_tidebreak",
+			"ok": true
+		},
+		{
+			"check": "inventory panel opens",
+			"ok": true
+		},
+		{
+			"check": "screenshot 05_inventory",
+			"ok": true
+		},
+		{
+			"check": "craft panel opens",
+			"ok": true
+		},
+		{
+			"check": "screenshot 06_craft",
+			"ok": true
+		},
+		{
+			"check": "craft panel fabricates alloy plate",
+			"ok": true
+		},
+		{
+			"check": "surface contains flora",
+			"ok": true
+		},
+		{
+			"check": "scan target selected",
+			"ok": true
+		},
+		{
+			"check": "UI observe records species",
+			"ok": true
+		},
+		{
+			"check": "observation count advances",
+			"ok": true
+		},
+		{
+			"check": "screenshot 07_observed",
+			"ok": true
+		},
+		{
+			"check": "UI gather adds harvest item",
+			"ok": true
+		},
+		{
+			"check": "market target selected",
+			"ok": true
+		},
+		{
+			"check": "market panel opens from world target",
+			"ok": true
+		},
+		{
+			"check": "screenshot 08_market",
+			"ok": true
+		},
+		{
+			"check": "market panel buy spends credits",
+			"ok": true
+		},
+		{
+			"check": "market panel buy reduces stock",
+			"ok": true
+		},
+		{
+			"check": "npc target selected",
+			"ok": true
+		},
+		{
+			"check": "dialogue panel opens from world target",
+			"ok": true
+		},
+		{
+			"check": "screenshot 09_dialogue",
+			"ok": true
+		},
+		{
+			"check": "dialogue choice advances node",
+			"ok": true
+		},
+		{
+			"check": "build panel opens",
+			"ok": true
+		},
+		{
+			"check": "screenshot 10_build",
+			"ok": true
+		},
+		{
+			"check": "build panel places power cell",
+			"ok": true
+		},
+		{
+			"check": "ship panel opens",
+			"ok": true
+		},
+		{
+			"check": "screenshot 11_ship",
+			"ok": true
+		},
+		{
+			"check": "ship panel equips cargo pods",
+			"ok": true
+		},
+		{
+			"check": "journal panel opens",
+			"ok": true
+		},
+		{
+			"check": "screenshot 12_journal",
+			"ok": true
+		},
+		{
+			"check": "settings panel opens",
+			"ok": true
+		},
+		{
+			"check": "screenshot 13_settings",
+			"ok": true
+		},
+		{
+			"check": "pause overlay opens",
+			"ok": true
+		},
+		{
+			"check": "pause save writes a field record",
+			"ok": true
+		},
+		{
+			"check": "screenshot 14_pause",
+			"ok": true
+		},
+		{
+			"check": "pause overlay closes",
+			"ok": true
+		},
+		{
+			"check": "gameplay generated journal entries",
+			"ok": true
+		},
+		{
+			"check": "gameplay generated codex observations",
+			"ok": true
+		},
+		{
+			"check": "screenshot 15_planet_360x640",
+			"ok": true
+		},
+		{
+			"check": "tall 9:20 dock fits portrait width",
+			"ok": true
+		},
+		{
+			"check": "tall 9:20 joystick remains on screen",
+			"ok": true
+		},
+		{
+			"check": "screenshot 16_planet_1080x2400",
+			"ok": true
+		}
+	],
+	"tested_resolutions": [
+		[
+			720,
+			1280
+		],
+		[
+			360,
+			640
+		],
+		[
+			1080,
+			2400
+		]
+	],
+	"window": [
+		720,
+		1280
+	]
+}
