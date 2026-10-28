@@ -35,6 +35,7 @@
         {"kind": "npc", "id": "dialogue.npc.kasa", "x": 1550, "y": 1680},
         {"kind": "market", "id": "market.vela.coast", "x": 850, "y": 1560},
         {"kind": "relay", "id": "object.relay_console", "x": 1760, "y": 980},
+        {"kind": "workbench", "id": "object.workbench.vela", "x": 1290, "y": 2050},
         {"kind": "build_site", "id": "base.vela.pad", "x": 1310, "y": 1840, "cols": 2, "rows": 2}
       ],
       "hazards": ["thin_oxygen_at_altitude", "signal_static"],

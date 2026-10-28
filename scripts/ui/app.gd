@@ -12,8 +12,20 @@ var game_screen: BtvGameScreen
 var menu_root: Control
 var menu_backdrop: BtvBackdrop
 var menu_status: Label
-var seed_input: LineEdit
 var _rebuild_pending := false
+var _entry: BtvEntryMinigame
+
+func _input(event: InputEvent) -> void:
+	if menu_backdrop == null or _entry != null:
+		return
+	if event is InputEventMouseMotion:
+		menu_backdrop.set_pointer(event.position, true)
+	elif event is InputEventScreenDrag:
+		menu_backdrop.set_pointer(event.position, true)
+	elif event is InputEventScreenTouch and event.pressed:
+		menu_backdrop.tap(event.position)
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		menu_backdrop.tap(event.position)
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -23,7 +35,22 @@ func _ready() -> void:
 	if not registry.load_all("res://content"):
 		_show_boot_error()
 		return
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.apply_settings(settings)
+		audio.music.force_state("TITLE")
 	_show_menu()
+	_bind_audio(self)
+
+func _bind_audio(root: Node) -> void:
+	for child in root.find_children("*", "BaseButton", true, false):
+		if not child.pressed.is_connected(_on_any_button):
+			child.pressed.connect(_on_any_button)
+
+func _on_any_button() -> void:
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.play("ui.click")
 
 func _load_settings() -> void:
 	settings = {
@@ -36,9 +63,11 @@ func _load_settings() -> void:
 	}
 	var config := ConfigFile.new()
 	if config.load(SETTINGS_PATH) != OK:
+		settings.merge(GameSession.default_settings(), false)
 		return
 	for key in settings.keys():
 		settings[key] = config.get_value("settings", str(key), settings[key])
+	settings.merge(GameSession.default_settings(), false)
 
 func _save_settings() -> void:
 	var config := ConfigFile.new()
@@ -58,6 +87,7 @@ func _show_boot_error() -> void:
 
 func _show_menu() -> void:
 	_rebuild_pending = false
+	_entry = null
 	if game_screen != null:
 		game_screen.queue_free()
 		game_screen = null
@@ -80,45 +110,39 @@ func _show_menu() -> void:
 	var center := CenterContainer.new()
 	margin.add_child(center)
 	var column := VBoxContainer.new()
-	column.custom_minimum_size = Vector2(480, 0)
-	column.add_theme_constant_override("separation", 10)
+	column.custom_minimum_size = Vector2(560, 0)
+	column.add_theme_constant_override("separation", 14)
 	center.add_child(column)
-	var title := BtvTheme.header(registry.loc.t("ui.title"), 38)
+	var title := BtvTheme.header(registry.loc.t("ui.title"), 48)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(title)
-	var subtitle := BtvTheme.label(registry.loc.t("ui.subtitle"), 15, BtvTheme.TEXT_DIM)
+	var subtitle := BtvTheme.label(registry.loc.t("ui.subtitle"), 18, BtvTheme.TEXT_DIM)
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(subtitle)
-	column.add_child(BtvTheme.spacer(10))
-	var new_hint := BtvTheme.wrapped(registry.loc.t("ui.new_game_hint"), 13, BtvTheme.TEXT_DIM)
+	column.add_child(BtvTheme.spacer(14))
+	var new_hint := BtvTheme.wrapped(registry.loc.t("ui.new_game_hint"), 15, BtvTheme.TEXT_DIM)
 	new_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(new_hint)
-	var seed_label := BtvTheme.label(registry.loc.t("ui.seed_label"), 12, BtvTheme.TEXT_FAINT)
-	column.add_child(seed_label)
-	seed_input = LineEdit.new()
-	seed_input.text = str(int(settings.get("last_seed", DEFAULT_SEED)))
-	seed_input.custom_minimum_size = Vector2(0, 48)
-	column.add_child(seed_input)
-	var new_button := BtvTheme.button(registry.loc.t("ui.new_journey"), 54)
+	var new_button := BtvTheme.button(registry.loc.t("ui.new_journey"), 64)
 	new_button.pressed.connect(_on_new_game)
 	column.add_child(new_button)
-	var continue_button := BtvTheme.button(registry.loc.t("ui.continue"), 54)
+	var continue_button := BtvTheme.button(registry.loc.t("ui.continue"), 62)
 	continue_button.disabled = not _save_exists()
 	continue_button.pressed.connect(_on_continue)
 	column.add_child(continue_button)
 	var continue_hint := BtvTheme.label(
 		registry.loc.t("ui.save_found") if _save_exists() else registry.loc.t("ui.no_save"),
-		11, BtvTheme.TEXT_FAINT)
+		13, BtvTheme.TEXT_FAINT)
 	continue_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(continue_hint)
-	var settings_button := BtvTheme.button(registry.loc.t("ui.settings"), 50)
+	var settings_button := BtvTheme.button(registry.loc.t("ui.settings"), 60)
 	settings_button.pressed.connect(_open_menu_settings)
 	column.add_child(settings_button)
-	var quit_button := BtvTheme.button(registry.loc.t("ui.quit"), 48)
+	var quit_button := BtvTheme.button(registry.loc.t("ui.quit"), 58)
 	quit_button.pressed.connect(func() -> void: get_tree().quit())
 	column.add_child(quit_button)
-	column.add_child(BtvTheme.spacer(6))
-	var hint := BtvTheme.label(registry.loc.t("ui.menu_hint"), 11, BtvTheme.TEXT_FAINT)
+	column.add_child(BtvTheme.spacer(8))
+	var hint := BtvTheme.label(registry.loc.t("ui.menu_hint"), 13, BtvTheme.TEXT_FAINT)
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(hint)
 	menu_status = BtvTheme.label("", 12, BtvTheme.DANGER)
@@ -136,14 +160,29 @@ func _save_exists() -> bool:
 	return false
 
 func _on_new_game() -> void:
-	var seed := DEFAULT_SEED
-	if seed_input != null and seed_input.text.strip_edges().is_valid_int():
-		seed = int(seed_input.text.strip_edges())
+	var seed := randi_range(100000, 999999)
 	settings["last_seed"] = seed
 	_save_settings()
 	var game := GameSession.new(registry)
 	game.new_game(seed)
 	game.settings = settings.duplicate()
+	_show_entry(game)
+
+func _show_entry(game: GameSession) -> void:
+	_entry = BtvEntryMinigame.new()
+	_entry.setup(registry.loc, game.world_seed, str(settings.get("quality", "balanced")), bool(settings.get("reduced_motion", false)))
+	add_child(_entry)
+	_entry.finished.connect(func(hull: float) -> void: _on_entry_finished(game, hull))
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.music.force_state("ENTRY")
+		audio.start_loop("entry.rumble", 1.2)
+
+func _on_entry_finished(game: GameSession, hull: float) -> void:
+	game.facts["entry_hull"] = hull
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.stop_loop("entry.rumble", 0.8)
 	_start_game(game)
 
 func _on_continue() -> void:
@@ -159,9 +198,14 @@ func _on_continue() -> void:
 	_start_game(game)
 
 func _start_game(game: GameSession) -> void:
+	_entry = null
 	session = game
 	settings = session.settings.duplicate()
 	_save_settings()
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.apply_settings(settings)
+		audio.music.force_state("EXPLORE_CALM")
 	theme = BtvTheme.make_theme(float(settings.get("text_scale", 1.0)))
 	for child in get_children():
 		child.queue_free()
@@ -180,6 +224,11 @@ func _on_exit_to_menu() -> void:
 		settings = session.settings.duplicate()
 		_save_settings()
 	session = null
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.stop_loop("mining.loop", 0.1)
+		audio.stop_loop("jetpack.loop", 0.1)
+		audio.music.force_state("TITLE")
 	_show_menu()
 
 func _on_game_settings_changed() -> void:
@@ -213,6 +262,9 @@ func _open_menu_settings() -> void:
 func _on_menu_setting_changed(key: String, value) -> void:
 	settings[key] = value
 	_save_settings()
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.apply_settings(settings)
 	if menu_backdrop != null:
 		menu_backdrop.set_visuals(int(settings.get("last_seed", DEFAULT_SEED)), str(settings.get("quality", "balanced")), bool(settings.get("reduced_motion", false)))
 	theme = BtvTheme.make_theme(float(settings.get("text_scale", 1.0)))
@@ -221,5 +273,8 @@ func _on_menu_settings_applied(values: Dictionary) -> void:
 	for key in values.keys():
 		settings[key] = values[key]
 	_save_settings()
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.apply_settings(settings)
 	theme = BtvTheme.make_theme(float(settings.get("text_scale", 1.0)))
 	call_deferred("_show_menu")

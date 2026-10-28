@@ -61,13 +61,25 @@ func _init(content_registry: ContentRegistry, localization: Localization = null)
 	ship.setup(self)
 	settings = default_settings()
 
-func default_settings() -> Dictionary:
+static func default_settings() -> Dictionary:
 	return {
 		"quality": "balanced",
 		"reduced_motion": false,
 		"left_handed": false,
 		"text_scale": 1.0,
 		"touch_sensitivity": 1.0,
+		"screen_shake": 1.0,
+		"hold_sprint": true,
+		"hold_jetpack": true,
+		"vol_master": 0.9,
+		"vol_music": 0.6,
+		"vol_sfx": 0.85,
+		"vol_ambience": 0.6,
+		"vol_dialogue": 0.85,
+		"vol_ui": 0.7,
+		"vol_ship": 0.8,
+		"vol_combat": 0.8,
+		"music_enabled": true,
 	}
 
 func new_game(world_seed_value: int = START_WORLD_SEED) -> void:

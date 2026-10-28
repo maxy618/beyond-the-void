@@ -56,6 +56,45 @@ func _fill() -> void:
 	left.toggled.connect(func(value: bool) -> void: _apply("left_handed", value))
 	body.add_child(left)
 
+	add_section(loc.t("ui.audio_section"))
+	for entry in [
+		["vol_master", "ui.master_volume"],
+		["vol_music", "ui.music_volume"],
+		["vol_sfx", "ui.sfx_volume"],
+		["vol_ambience", "ui.ambience_volume"],
+	]:
+		add_section(loc.t(str(entry[1])))
+		var volume := _slider(float(values.get(str(entry[0]), 0.8)), 0.0, 1.0, 0.05)
+		volume.value_changed.connect(func(value: float) -> void: _apply(str(entry[0]), value))
+		body.add_child(volume)
+
+	var music_on := CheckButton.new()
+	music_on.text = loc.t("ui.music_enabled")
+	music_on.button_pressed = bool(values.get("music_enabled", true))
+	music_on.custom_minimum_size = Vector2(0, 48)
+	music_on.toggled.connect(func(value: bool) -> void: _apply("music_enabled", value))
+	body.add_child(music_on)
+
+	add_section(loc.t("ui.controls_section"))
+	var hold_sprint := CheckButton.new()
+	hold_sprint.text = loc.t("ui.hold_sprint")
+	hold_sprint.button_pressed = bool(values.get("hold_sprint", true))
+	hold_sprint.custom_minimum_size = Vector2(0, 48)
+	hold_sprint.toggled.connect(func(value: bool) -> void: _apply("hold_sprint", value))
+	body.add_child(hold_sprint)
+
+	var hold_jet := CheckButton.new()
+	hold_jet.text = loc.t("ui.hold_jetpack")
+	hold_jet.button_pressed = bool(values.get("hold_jetpack", true))
+	hold_jet.custom_minimum_size = Vector2(0, 48)
+	hold_jet.toggled.connect(func(value: bool) -> void: _apply("hold_jetpack", value))
+	body.add_child(hold_jet)
+
+	add_section(loc.t("ui.screen_shake"))
+	var shake := _slider(float(values.get("screen_shake", 1.0)), 0.0, 1.0, 0.05)
+	shake.value_changed.connect(func(value: float) -> void: _apply("screen_shake", value))
+	body.add_child(shake)
+
 	body.add_child(BtvTheme.spacer(8))
 	var apply_button := BtvTheme.button(loc.t("ui.apply"), 52)
 	apply_button.pressed.connect(func() -> void:

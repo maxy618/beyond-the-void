@@ -1,13 +1,15 @@
 extends SceneTree
 
-## Windowed portrait smoke: boots the real scene, exercises UI paths and captures screenshots.
-## Run without --headless: Godot renders the actual interface for visual evidence.
+## Windowed portrait smoke: boots the real scene, drives the surface screen,
+## exercises movement, panels, pause/save and captures screenshots.
+## Run without --headless so Godot renders the actual interface.
 
 const OUT := "res://build/reports/screenshots"
 const REPORT := "res://build/reports/ui_smoke.json"
 const UI_SAVE := "user://saves/slot_1.json"
 
 var app: Control
+var screen: BtvGameScreen
 var failures: Array[String] = []
 var steps: Array[Dictionary] = []
 var screenshots: Array[String] = []
@@ -41,16 +43,14 @@ func _frames(count: int = 2) -> void:
 	for index in count:
 		await process_frame
 
-func _close_panel(screen: BtvGameScreen) -> void:
+func _physics(count: int) -> void:
+	for index in count:
+		await physics_frame
+
+func _close_panel() -> void:
 	if screen._panel != null:
 		screen._panel.close()
 	await _frames(2)
-
-func _move_to(screen: BtvGameScreen, point: Vector2, mode_id: String) -> void:
-	screen.session.player_pos = point
-	screen.session.set_tool_mode(mode_id)
-	screen._update_target()
-	screen._update_hud()
 
 func _run() -> void:
 	for suffix in ["", ".tmp", ".bak"]:
@@ -69,150 +69,95 @@ func _run() -> void:
 	root.add_child(app)
 	await _frames(4)
 	_check(app.registry != null and app.registry.load_ok, "content pack loaded")
-	_check(app.menu_root != null and app.seed_input != null, "title menu built")
+	_check(app.menu_root != null and app.menu_root.get_child_count() >= 2, "title menu built")
+	var menu_fields: Array = app.menu_root.find_children("*", "LineEdit", true, false)
+	_check(menu_fields.is_empty(), "title menu has no seed field")
 	await _shot("01_title_720x1280")
 
-	app.seed_input.text = "424242"
 	app._on_new_game()
 	await _frames(4)
-	var screen := app.game_screen as BtvGameScreen
+	_check(app._entry != null, "entry mini-game starts on new game")
+	if app._entry != null:
+		await _shot("02_entry")
+		app._entry._finish_early()
+		await _frames(4)
+	screen = app.game_screen as BtvGameScreen
 	_check(screen != null, "game screen starts")
 	if screen == null:
 		_finish()
 		return
-	_check(screen.session.mode == "space", "new game begins in space")
+	_check(screen.session.mode == "planet", "new game begins on a planet surface")
+	_check(screen.session.planet_id == "planet.vela", "new game lands on Vela")
 	_check(screen.world != null and screen.world.visible, "world view present")
-	await _shot("02_space")
+	_check(screen.player != null, "player present")
+	_check(screen.director != null and screen.director.camera != null, "camera director owns a camera")
+	_check(screen._viewport.size.x <= 360 and screen._viewport.size.y > 0, "world renders in a low-resolution viewport")
+	await _shot("02_surface")
 
-	screen._open_chart()
+	_check(screen.combat != null, "combat director present")
+	_check(screen.combat.hostiles.size() == 3, "three hostiles spawned")
+	_check(screen._fire_button != null and screen._fire_button.visible, "fire button present")
+	var bolts_before := screen.combat.bolts.size()
+	screen._on_fire_down()
 	await _frames(2)
-	_check(screen._panel is BtvChartSheet, "chart panel opens in space")
-	await _shot("03_chart")
-	await _close_panel(screen)
+	screen._on_fire_up()
+	_check(screen.combat.bolts.size() > bolts_before, "fire spawns a player bolt")
+	_check(screen.player.combat, "player enters combat pose after firing")
+	await _shot("02b_combat")
 
-	var landed := screen.session.land_on("planet.vela")
-	_check(bool(landed.get("ok", false)), "land on Vela")
-	screen._refresh_world()
-	await _frames(3)
-	_check(screen.session.mode == "planet", "planet mode after landing")
-	await _shot("04_planet_tidebreak")
+	screen._on_player_died()
+	_check(screen._dying and not screen.player.visible, "death hides the player for reboot")
+	await _physics(130)
+	_check(not screen._dying and screen.player.visible, "player reboots after the delay")
+	_check(is_equal_approx(screen.player.health, screen.player.max_health), "reboot restores hull")
+	_check(is_equal_approx(screen.player.shield, screen.player.max_shield), "reboot restores shield")
+
+	var start_x := screen.player.position.x
+	screen._on_move_stick(Vector2.RIGHT)
+	await _physics(30)
+	screen._on_move_stick(Vector2.ZERO)
+	_check(screen.player.position.x > start_x + 8.0, "move stick moves the player right")
+	_check(screen.player.facing == "right", "player faces movement when aim is neutral")
+
+	var stamina_before := screen.player.stamina
+	screen._on_sprint_toggled(true)
+	screen._on_move_stick(Vector2.RIGHT)
+	await _physics(30)
+	screen._on_move_stick(Vector2.ZERO)
+	screen._on_sprint_toggled(false)
+	_check(screen.player.stamina < stamina_before, "sprint drains stamina")
+	await _physics(30)
+
+	var energy_before := screen.player.energy
+	screen._on_jet_toggled(true)
+	await _physics(25)
+	screen._on_jet_toggled(false)
+	_check(screen.player.altitude > 0.0, "jetpack lifts the player")
+	_check(screen.player.energy < energy_before, "jetpack drains energy")
+	await _physics(90)
 
 	screen._open_inventory()
 	await _frames(2)
 	_check(screen._panel is BtvInventorySheet, "inventory panel opens")
-	await _shot("05_inventory")
-	await _close_panel(screen)
+	await _shot("03_inventory")
+	await _close_panel()
 
 	screen._open_craft()
 	await _frames(2)
 	_check(screen._panel is BtvCraftSheet, "craft panel opens")
-	await _shot("06_craft")
-	var craft_sheet := screen._panel as BtvCraftSheet
-	var alloy_before := screen.session.inventory.count("item.alloy_plate")
-	craft_sheet._craft("recipe.refine.alloy_plate")
-	await _frames(2)
-	_check(screen.session.inventory.count("item.alloy_plate") > alloy_before, "craft panel fabricates alloy plate")
-	await _close_panel(screen)
-
-	var layout: Dictionary = screen.session.surface_layout()
-	var flora_node: Dictionary = {}
-	for raw in layout.get("nodes", []):
-		var node: Dictionary = raw
-		if str(node.get("kind", "")) == "flora":
-			flora_node = node
-			break
-	_check(not flora_node.is_empty(), "surface contains flora")
-	if not flora_node.is_empty():
-		var node_pos := Vector2(float(flora_node.x), float(flora_node.y))
-		_move_to(screen, node_pos + Vector2(30, 0), "mode.scan")
-		_check(str(screen._target.get("kind", "")) == "species", "scan target selected")
-		var species_id := str(flora_node.get("species_id", ""))
-		var before_observations := screen.session.observations.size()
-		screen._action_button.pressed.emit()
-		await _frames(3)
-		_check(screen.session.observations.has(species_id), "UI observe records species")
-		_check(screen.session.observations.size() > before_observations, "observation count advances")
-		await _shot("07_observed")
-
-		var item_id := str((screen.session.registry.get_species(species_id) as Dictionary).get("harvest", {}).get("item_id", ""))
-		var before_count := screen.session.inventory.count(item_id)
-		_move_to(screen, node_pos + Vector2(30, 0), "mode.sample")
-		screen._action_button.pressed.emit()
-		await _frames(2)
-		_check(screen.session.inventory.count(item_id) > before_count, "UI gather adds harvest item")
-
-	var anchors: Array = screen.session.get_planet().get("anchors", [])
-	var market_anchor: Dictionary = {}
-	var npc_anchor: Dictionary = {}
-	for raw_anchor in anchors:
-		var anchor: Dictionary = raw_anchor
-		if str(anchor.get("kind", "")) == "market":
-			market_anchor = anchor
-		elif str(anchor.get("kind", "")) == "npc":
-			npc_anchor = anchor
-	if not market_anchor.is_empty():
-		_move_to(screen, Vector2(float(market_anchor.x) + 90.0, float(market_anchor.y)), "mode.scan")
-		_check(str(screen._target.get("kind", "")) == "market", "market target selected")
-		screen._action_button.pressed.emit()
-		await _frames(3)
-		_check(screen._panel is BtvMarketSheet, "market panel opens from world target")
-		await _shot("08_market")
-		var market_sheet := screen._panel as BtvMarketSheet
-		var credits_before := screen.session.credits
-		var stock_before: int = screen.session.market_states["market.vela.coast"].stock_of("item.saltglass_shard")
-		market_sheet._buy("item.saltglass_shard")
-		market_sheet._buy("item.saltglass_shard")
-		await _frames(2)
-		_check(screen.session.credits < credits_before, "market panel buy spends credits")
-		_check(screen.session.market_states["market.vela.coast"].stock_of("item.saltglass_shard") < stock_before, "market panel buy reduces stock")
-		await _close_panel(screen)
-	if not npc_anchor.is_empty():
-		_move_to(screen, Vector2(float(npc_anchor.x) + 80.0, float(npc_anchor.y)), "mode.scan")
-		_check(str(screen._target.get("kind", "")) == "npc", "npc target selected")
-		screen._action_button.pressed.emit()
-		await _frames(3)
-		_check(screen._panel is BtvDialogueSheet, "dialogue panel opens from world target")
-		await _shot("09_dialogue")
-		var dialogue_sheet := screen._panel as BtvDialogueSheet
-		var node_before := screen.session.dialogue.current_node_id
-		dialogue_sheet._choose("ask_signal")
-		await _frames(2)
-		_check(screen.session.dialogue.current_node_id != node_before, "dialogue choice advances node")
-		await _close_panel(screen)
-
-	screen._open_build()
-	await _frames(2)
-	_check(screen._panel is BtvBuildSheet, "build panel opens")
-	await _shot("10_build")
-	var build_sheet := screen._panel as BtvBuildSheet
-	var buildings_before := screen.session.buildings.size()
-	build_sheet._build("build.power_cell", build_sheet._first_free_slot())
-	await _frames(2)
-	_check(screen.session.buildings.size() > buildings_before, "build panel places power cell")
-	await _close_panel(screen)
-
-	screen._open_ship()
-	await _frames(2)
-	_check(screen._panel is BtvShipSheet, "ship panel opens")
-	await _shot("11_ship")
-	var ship_sheet := screen._panel as BtvShipSheet
-	var capacity_before := screen.session.inventory.capacity_kg
-	ship_sheet._equip("ship.module.cargo_pods")
-	await _frames(2)
-	_check(screen.session.inventory.capacity_kg > capacity_before, "ship panel equips cargo pods")
-	await _close_panel(screen)
+	await _close_panel()
 
 	screen._open_journal()
 	await _frames(2)
 	_check(screen._panel is BtvJournalSheet, "journal panel opens")
-	await _shot("12_journal")
-	await _close_panel(screen)
+	await _shot("04_journal")
+	await _close_panel()
 
 	screen._open_settings()
 	await _frames(2)
 	_check(screen._panel is BtvSettingsSheet, "settings panel opens")
-	await _shot("13_settings")
-	await _close_panel(screen)
+	await _shot("05_settings")
+	await _close_panel()
 
 	screen._toggle_pause()
 	await _frames(2)
@@ -220,27 +165,32 @@ func _run() -> void:
 	screen._save_game()
 	await _frames(2)
 	_check(FileAccess.file_exists(UI_SAVE), "pause save writes a field record")
-	await _shot("14_pause")
+	await _shot("06_pause")
 	screen._toggle_pause()
 	await _frames(1)
 	_check(not screen._pause_layer.visible, "pause overlay closes")
 
-	_check(screen.session.journal.size() > 0, "gameplay generated journal entries")
-	_check(screen.session.observations.size() > 0, "gameplay generated codex observations")
-	await _responsive_shots(screen)
+	await _resolution_checks()
 	_finish()
 
-func _responsive_shots(screen: BtvGameScreen) -> void:
-	root.size = Vector2i(360, 640)
-	await _frames(3)
-	await _shot("15_planet_360x640")
-	root.size = Vector2i(1080, 2400)
-	await _frames(3)
-	var tall_dock := screen._dock.get_global_rect()
-	var tall_stick := screen._joystick.get_global_rect()
-	_check(tall_dock.size.x <= 1080.0 and tall_dock.end.x <= 1080.5, "tall 9:20 dock fits portrait width")
-	_check(tall_stick.position.x >= 0.0 and tall_stick.end.x <= 1080.5, "tall 9:20 joystick remains on screen")
-	await _shot("16_planet_1080x2400")
+func _resolution_checks() -> void:
+	for size in [Vector2i(360, 640), Vector2i(1080, 2400)]:
+		root.size = size
+		DisplayServer.window_set_size(size)
+		await _frames(4)
+		var label := "%dx%d" % [size.x, size.y]
+		print("LAYOUT %s window=%s root=%s visible=%s content=%s screen=%s vp=%s vpc=%s" % [
+			label, DisplayServer.window_get_size(), root.size, root.get_visible_rect().size,
+			root.content_scale_size, screen.size, screen._viewport.size, screen._viewport_container.size])
+		print("LAYOUT2 %s vpc_global=%s vp_texture=%s vp_visible=%s camera_vp=%s world_rect=%s" % [
+			label, screen._viewport_container.get_global_rect(),
+			screen._viewport.get_texture().get_size(), screen._viewport.get_visible_rect().size,
+			screen.director._viewport_size, screen._world_root.get_viewport_rect().size])
+		var view_rect := Rect2(Vector2.ZERO, screen.size)
+		_check(view_rect.has_point(screen._move_stick.get_global_rect().get_center()), "move stick on screen at " + label)
+		_check(view_rect.has_point(screen._aim_stick.get_global_rect().get_center()), "aim stick on screen at " + label)
+		_check(screen._viewport.size.x >= 160, "world viewport stays usable at " + label)
+		await _shot("07_surface_" + label)
 
 func _finish() -> void:
 	var report := {

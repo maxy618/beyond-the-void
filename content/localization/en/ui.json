@@ -293,6 +293,16 @@
     "toast.worldgen_failed": "The chart could not resolve this seed",
     "toast.invalid_save": "The field record failed validation",
     "toast.focus_cleared": "Controls released",
-    "toast.settings_saved": "Settings saved"
+    "toast.settings_saved": "Settings saved",
+    "ui.master_volume": "Master volume",
+    "ui.music_volume": "Music volume",
+    "ui.sfx_volume": "Effects volume",
+    "ui.ambience_volume": "Ambience volume",
+    "ui.music_enabled": "Music",
+    "ui.screen_shake": "Screen shake",
+    "ui.hold_sprint": "Sprint button: hold",
+    "ui.hold_jetpack": "Jetpack button: hold",
+    "ui.audio_section": "Audio",
+    "ui.controls_section": "Controls"
   }
 }

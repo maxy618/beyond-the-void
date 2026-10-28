@@ -34,3 +34,5 @@ addons/godot_mcp/
 
 # Agent tooling state
 .serena/
+.ruff_cache/
+.playwright-mcp/

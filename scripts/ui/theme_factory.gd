@@ -31,22 +31,22 @@ static func make_theme(text_scale: float = 1.0) -> Theme:
 	theme.set_color("font_hover_color", "Button", Color.WHITE)
 	theme.set_color("font_pressed_color", "Button", BG)
 	theme.set_color("font_disabled_color", "Button", TEXT_FAINT)
-	theme.set_font_size("font_size", "Button", int(round(16.0 * scale)))
-	theme.set_stylebox("normal", "Button", flat(PANEL_LIGHT, 12, LINE, 1))
-	theme.set_stylebox("hover", "Button", flat(Color("#243b45"), 12, ACCENT, 1))
-	theme.set_stylebox("pressed", "Button", flat(ACCENT, 12, ACCENT, 1))
-	theme.set_stylebox("disabled", "Button", flat(Color(0.06, 0.09, 0.12, 0.8), 12, Color(0.2, 0.28, 0.3, 0.3), 1))
-	theme.set_stylebox("focus", "Button", flat(Color(0, 0, 0, 0), 12, ACCENT, 1))
+	theme.set_font_size("font_size", "Button", int(round(17.0 * scale)))
+	theme.set_stylebox("normal", "Button", button_box(PANEL_LIGHT, LINE, 1))
+	theme.set_stylebox("hover", "Button", button_box(Color("#1b3540"), ACCENT, 2))
+	theme.set_stylebox("pressed", "Button", button_box(ACCENT, ACCENT, 2))
+	theme.set_stylebox("disabled", "Button", button_box(Color(0.05, 0.08, 0.1, 0.85), Color(0.2, 0.28, 0.3, 0.35), 1))
+	theme.set_stylebox("focus", "Button", button_box(Color(0, 0, 0, 0), ACCENT, 1))
 	theme.set_constant("outline_size", "Button", 0)
-	theme.set_stylebox("panel", "PanelContainer", flat(PANEL, 18, LINE, 1))
-	theme.set_stylebox("panel", "Panel", flat(PANEL, 18, LINE, 1))
-	theme.set_stylebox("normal", "LineEdit", flat(BG_DEEP, 10, LINE, 1))
-	theme.set_stylebox("focus", "LineEdit", flat(BG_DEEP, 10, ACCENT, 1))
+	theme.set_stylebox("panel", "PanelContainer", flat(PANEL, 6, LINE, 1))
+	theme.set_stylebox("panel", "Panel", flat(PANEL, 6, LINE, 1))
+	theme.set_stylebox("normal", "LineEdit", flat(BG_DEEP, 3, LINE, 1))
+	theme.set_stylebox("focus", "LineEdit", flat(BG_DEEP, 3, ACCENT, 1))
 	theme.set_color("font_color", "LineEdit", TEXT)
 	theme.set_color("caret_color", "LineEdit", ACCENT)
-	theme.set_stylebox("normal", "OptionButton", flat(PANEL_LIGHT, 10, LINE, 1))
-	theme.set_stylebox("hover", "OptionButton", flat(Color("#243b45"), 10, ACCENT, 1))
-	theme.set_stylebox("pressed", "OptionButton", flat(PANEL_SOFT, 10, ACCENT, 1))
+	theme.set_stylebox("normal", "OptionButton", flat(PANEL_LIGHT, 3, LINE, 1))
+	theme.set_stylebox("hover", "OptionButton", flat(Color("#243b45"), 3, ACCENT, 1))
+	theme.set_stylebox("pressed", "OptionButton", flat(PANEL_SOFT, 3, ACCENT, 1))
 	theme.set_color("font_color", "OptionButton", TEXT)
 	theme.set_stylebox("panel", "PopupMenu", flat(PANEL, 10, LINE, 1))
 	theme.set_color("font_color", "PopupMenu", TEXT)
@@ -78,6 +78,17 @@ static func flat(color: Color, radius: int = 12, border: Color = Color.TRANSPARE
 	style.content_margin_right = 14
 	style.content_margin_top = 10
 	style.content_margin_bottom = 10
+	return style
+
+static func button_box(bg: Color, border: Color, border_width: int) -> StyleBoxFlat:
+	var style := flat(bg, 3, border, border_width)
+	style.content_margin_left = 18
+	style.content_margin_right = 18
+	style.content_margin_top = 10
+	style.content_margin_bottom = 10
+	style.shadow_color = Color(0, 0, 0, 0.35)
+	style.shadow_size = 2
+	style.shadow_offset = Vector2(0, 2)
 	return style
 
 static func label(text: String, size: int = 16, color: Color = TEXT) -> Label:

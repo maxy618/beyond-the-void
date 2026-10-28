@@ -10,10 +10,38 @@ var time: float = 0.0
 var stars: Array = []
 var dust: Array = []
 var nebula: Array = []
+var pointer := Vector2.ZERO
+var pointer_active := false
+
+var _drone: Sprite2D
+var _drone_pos := Vector2.ZERO
+var _drone_vel := Vector2.ZERO
+var _drone_ready := false
+var _trail: Array[Vector2] = []
+var _rings: Array[Dictionary] = []
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_drone = Sprite2D.new()
+	_drone.texture = BtvPixelSprites.prop_texture("drone")
+	_drone.scale = Vector2(2.2, 2.2)
+	_drone.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_drone.z_index = 5
+	add_child(_drone)
 	_rebuild()
+
+func set_pointer(position: Vector2, active: bool) -> void:
+	if active and not pointer_active:
+		_drone_pos = position
+		_drone_vel = Vector2.ZERO
+	pointer = position
+	pointer_active = active
+
+func tap(position: Vector2) -> void:
+	_rings.append({"pos": position, "age": 0.0})
+	if _rings.size() > 6:
+		_rings.pop_front()
+	set_pointer(position, true)
 
 func set_visuals(seed_value: int, quality_value: String, reduced: bool) -> void:
 	world_seed = seed_value
@@ -51,7 +79,35 @@ func _quality_count(base: int) -> int:
 func _process(delta: float) -> void:
 	if not reduced_motion:
 		time += delta
+	_update_drone(delta)
+	for ring in _rings:
+		ring["age"] = float(ring["age"]) + delta
+	_rings = _rings.filter(func(ring: Dictionary) -> bool: return float(ring["age"]) < 0.9)
 	queue_redraw()
+
+func _update_drone(delta: float) -> void:
+	if _drone == null or not _drone_ready:
+		if size.x > 2.0:
+			_drone_pos = size * Vector2(0.72, 0.3)
+			_drone.position = _drone_pos
+			_drone_ready = true
+		return
+	if pointer_active:
+		var target := pointer
+		if reduced_motion:
+			_drone_pos = target
+		else:
+			_drone_vel = _drone_vel.lerp((target - _drone_pos) * 7.0, 0.35)
+			_drone_pos += _drone_vel * delta
+	else:
+		var idle := size * Vector2(0.72, 0.3) + Vector2(sin(time * 0.5) * 18.0, cos(time * 0.4) * 10.0)
+		_drone_pos = _drone_pos.lerp(idle, 1.0 - exp(-2.0 * delta))
+	_drone.position = _drone_pos
+	_drone.rotation = clampf(_drone_vel.x * 0.001, -0.25, 0.25)
+	if not reduced_motion and _drone_pos.distance_to(pointer) > 2.0:
+		_trail.append(_drone_pos)
+		if _trail.size() > 16:
+			_trail.pop_front()
 
 func _draw() -> void:
 	var view := size
@@ -63,8 +119,30 @@ func _draw() -> void:
 	_draw_nebula(view)
 	_draw_stars(view)
 	_draw_lens(view)
+	_draw_trail()
+	_draw_rings()
 	_draw_dust(view)
 	_draw_frame(view)
+	_draw_hint(view)
+
+func _draw_trail() -> void:
+	for index in _trail.size():
+		var alpha := float(index) / float(maxi(1, _trail.size())) * 0.22
+		draw_circle(_trail[index], 1.0 + float(index) * 0.08, Color(0.5, 0.88, 0.78, alpha))
+
+func _draw_rings() -> void:
+	for ring in _rings:
+		var age := float(ring["age"])
+		var radius := 10.0 + age * 120.0
+		var alpha := maxf(0.0, 1.0 - age / 0.9)
+		draw_arc(ring["pos"], radius, 0.0, TAU, 40, Color(0.5, 0.88, 0.78, alpha * 0.55), 1.5)
+		draw_arc(ring["pos"], radius * 0.62, 0.0, TAU, 28, Color(0.92, 0.72, 0.46, alpha * 0.3), 1.0)
+
+func _draw_hint(view: Vector2) -> void:
+	if pointer_active or reduced_motion:
+		return
+	var alpha := 0.5 + 0.3 * sin(time * 1.4)
+	draw_string(ThemeDB.fallback_font, Vector2(24, view.y - 28), "DRAG TO GUIDE THE DRONE", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.56, 0.65, 0.66, alpha))
 
 func _draw_nebula(view: Vector2) -> void:
 	for blob in nebula:

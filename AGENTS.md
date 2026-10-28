@@ -166,3 +166,7 @@ D:\android\sdk\platform-tools\adb.exe exec-out screencap -p > build\reports\over
 - Inspect the final diff for accidental deletions and unrelated changes.
 - List every claimed feature with its evidence, every failure with reproduction, every blocked
   check with its prerequisite, and the known quality limitations.
+
+## Vision and test consultation (permanent)
+The primary agent ALWAYS consults the designated visual QA artist on every visual change and every visual test. It hands over real gameplay captures and animation clips; an unreviewed screenshot is not evidence. The artist's verdict is binding: exact file or capture, named defect, required fix. The primary fixes and re-submits.
+Parallel artist sessions are allowed only on completely disjoint asset sets with declared ownership; never let two sessions edit the same file. The primary waits for all sessions and integrates their work.

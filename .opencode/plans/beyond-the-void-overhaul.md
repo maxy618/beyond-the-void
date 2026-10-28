@@ -243,6 +243,25 @@ Reachability, collision, navigation, anchor validity, overlap, spawn safety, sil
 - **Adaptive resolution:** smoothed frame-time window, downgrade after sustained over-budget with cooldown, restore only after sustained headroom, hysteresis prevents flicker, UI and logic untouched; debug HUD shows scale and reason. Test forced pressure → downgrade → recovery with no oscillation.
 - **Test captures:** same location at all presets and all four sizes; inspect blur, pixel-grid consistency, UI scaling, player readability, camera jitter.
 
+**VFX and material stack (all configurable, persisted, quality-scaled):**
+
+- **No fake RTX claim:** hardware ray tracing is not promised on mobile. "RTX-style" means convincing screen-space and 2D approximations: planar water reflections, Fresnel and specular glints, refraction-like UV distortion, bloom, light shafts and wet-surface response. Settings and reports use those words, never "ray traced".
+- **Bloom / glow:** threshold + multi-scale blur, additive; crystals, visors, engines, bioluminescence, relay lights and UI accents. Strength control; UI is never blurred; no full-screen haze pass.
+- **Light shafts:** screen-space god rays masked by occluders; canopy, dust, water surface, station interiors and the black-hole showcase. Intensity and quality control; shafts must move with the light source, not sit as a static overlay.
+- **Reflections:** planar reflection for water, mirrored/screen-space reflections for wet ground and polished metal, Fresnel rim and sharp specular glints on glass, crystal and hull plate. No screen-space ray marching on mobile; each reflection is a real render pass or a designed sprite/mirror pass, not a painted gradient.
+- **Glass:** tinted transparency, edge highlight, scratches, condensation, interior haze and refraction offset on panes and canopies; readable at 1× density; no milky alpha slabs.
+- **Water:** two seamless animation phases, foam, depth tint, caustics, shoreline ripples, interaction ripples from player/ship, refraction; quality tiers must visibly differ; no flat opaque blue.
+- **Motion blur:** camera/velocity based, optional, **off by default on mobile**, forced off by reduced motion; strength control; must never smear the pixel grid, UI, reticle or text. The world may blur; gameplay information may not.
+- **Particles:** dust, spores, sparks, rain, sandstorm, ash, snow, bubbles, engine exhaust and combat impacts; wind-driven; density scaled by preset and by weather intensity; no particle count that hides the player or collisions.
+- **Weather:** sandstorms, rain, mist, ashfall and ember wind with visibility and movement effects; intensity setting; weather must read on screen and in audio, not only in a status label.
+- **Post:** per-biome colour grade only; no indiscriminate filter stack, no permanent vignette/chromatic-aberration wash that muddies pixel art. Every effect must be individually switchable.
+
+**VFX settings and budgets:**
+
+- Settings expose Bloom, Light shafts, Reflections, Water quality, Motion blur, Particle density, Weather intensity and Reduce motion; each has an on/off or Low/Medium/High/Ultra value, a sane mobile default, live preview, reset, and persistence in the save schema.
+- Every effect has a measured frame-time cost at 720×1280 and 1080×2400; adaptive resolution reacts to the total; no effect may obscure gameplay, UI, reticle or the pixel grid.
+- Acceptance: the same location captured with each effect on and off and at every preset; visible, measurable differences; settings survive restart and Continue; reduced motion disables shake and motion blur; every capture is reviewed by the visual QA artist with named defects and fixes.
+
 ---
 
 ## 10. Audio
@@ -368,9 +387,10 @@ Reachability, collision, navigation, anchor validity, overlap, spawn safety, sil
 - New theme, title, HUD, menu deck, restyled sheets, map fog/landmarks/player, item icons, settings with volume/shake/reduced-motion, gated market presentation.
 - World `SubViewport` pipeline with density, nearest scaling, native UI, snapping; camera/aim invariants verified.
 - Quality presets with real differences, matched screenshots and profiler timings; adaptive resolution with hysteresis and forced-pressure test.
-- Visuals: ambient modulation, halos/real glow, lights, particles, 3 parallax layers, haze, reflections, weather; no muddy filter stack.
+- Visuals: ambient modulation, halos/real glow, lights, particles, 3 parallax layers, haze, weather; the full configurable VFX stack above (bloom, light shafts, reflections, glass, water, optional motion blur) with quality-scaled defaults; no muddy filter stack.
+- VFX settings panel: per-effect controls, live preview, reset, persistence; verified on every preset and at both target resolutions.
 
-**Gate:** all required screens captured and individually inspected at four sizes; matched quality views; adaptive behavior proven; audio settings persist; defects fixed and re-captured. Commit and push.
+**Gate:** all required screens captured and individually inspected at four sizes; matched quality views with VFX on/off and at every preset; adaptive behavior proven; audio and VFX settings persist; the visual QA artist has reviewed the captures and named defects are fixed and re-captured. Commit and push.
 
 ### Stage 6 — Progression and content integration
 
@@ -388,7 +408,7 @@ Reachability, collision, navigation, anchor validity, overlap, spawn safety, sil
 4. **Circuit:** full longitude circuit across streaming boundaries and back by input; jetpack and persistence verified.
 5. **Controls:** full Stage 1 matrix via MCP including concurrent move+aim; ADB true multi-touch is BLOCKED if unsupported, never implied resolved.
 6. **Camera matrix:** all required captures, measured mode/zoom/shake, framing defects fixed and re-captured.
-7. **Rendering matrix:** density settings, sharpness, UI scaling, jitter, adaptive pressure/recovery, logic/input invariance; matched screenshots + frame times.
+7. **Rendering matrix:** density settings, sharpness, UI scaling, jitter, adaptive pressure/recovery, logic/input invariance; VFX on/off and every preset; motion blur and reduced motion; settings persistence after restart; matched screenshots + frame times.
 8. **Audio matrix:** every listed scenario with capture harness and active-event inspection; fix leaks/overlaps/missing sounds/transitions; listening quality reported separately and BLOCKED if unheard.
 9. **Procedural visual audit:** ≥30 regions across Vela, the curated planets and generated planets; species, structure, ship, planet and UI lineups; contact sheets reviewed at gameplay scale with written defects and fixes.
 10. **Android (ADB):** install, launch, navigate with taps/swipes/Back/Home, land, save/Continue, force-stop, relaunch; screenshots and logcat; crashes, script errors, force quits, performance.
@@ -475,6 +495,31 @@ A feature is complete only when it demonstrably changes the running game; parame
 
 ## 18. Definition of done
 
-**Milestone 1:** a fresh save is playable by real MCP input from crash to relay repair, takeoff, space flight, orbital scan, atmospheric entry, landing, exploration, save/quit/Continue; Vela streams seamlessly around its circumference and back; the camera director handles every on-foot, flight, space, entry, combat and black-hole-showcase mode without losing the player; the pixel pipeline renders sharp nearest-neighbor worlds with native UI and working adaptive resolution; Low/Medium/High/Ultra differ measurably; the procedural universe and ecology engines generate deterministically at ≥1,000 planets and ≥10,000 chunks; the full audio architecture runs with technical evidence and honest listening status; all suites/art/audio audits pass; the Android APK installs and plays on the emulator; reports state exactly what is proven and what is not.
+**Milestone 1:** a fresh save is playable by real MCP input from crash to relay repair, takeoff, space flight, orbital scan, atmospheric entry, landing, exploration, save/quit/Continue; Vela streams seamlessly around its circumference and back; the camera director handles every on-foot, flight, space, entry, combat and black-hole-showcase mode without losing the player; the pixel pipeline renders sharp nearest-neighbor worlds with native UI and working adaptive resolution; the configurable VFX stack (bloom, light shafts, reflections, glass, water, optional motion blur) visibly changes with each setting and preset; Low/Medium/High/Ultra differ measurably; the procedural universe and ecology engines generate deterministically at ≥1,000 planets and ≥10,000 chunks; the full audio architecture runs with technical evidence and honest listening status; all suites/art/audio audits pass; the Android APK installs and plays on the emulator; reports state exactly what is proven and what is not.
 
 **Milestone 2 (full game):** five curated landable planets plus a broad procedural universe with distinct environments, resources, discoveries, structures and exploration objectives, connected by space flight and the black-hole finale; ≥12 procedurally generated planets verified hands-on; the five-planet progression completed and saved; per-planet routes, audio and objectives verified. Only then is the game called content-complete.
+
+---
+
+## 19. Live user feedback (2026-10-28) — binding additions
+
+These are user-visible requirements, not suggestions. They enter the appropriate stage gate; none
+may be silently dropped.
+
+1. **Menu has no seed field.** Remove seed entry entirely. A new journey picks and stores a fresh
+   world seed itself; the player is never asked to type one.
+2. **Menu UI is too small.** Raise menu typography, control heights, spacing and default window
+   size so the title screen reads comfortably on a phone and on desktop.
+3. **Menu music is not accepted.** Rework the TITLE state (deeper, slower, less busy/looping
+   arpeggio); listening approval remains human-gated. Record the change and keep it distinct from
+   explore and combat music.
+4. **HUD buttons look random and fail a cockpit layout.** Replace ad-hoc placement with an
+   ergonomic thumb-zone grid: primary actions under the right thumb, movement under the left,
+   consistent sizes/radii/icon language, safe-area and notch padding, no overlapping bars or
+   sticks, verified at 720x1280, 1080x2400 and 360x640.
+5. **Controls must not be a cockpit.** Consolidate: one context button performs several actions;
+   fewer buttons, each with a clear primary meaning and a secondary long-press/context action.
+   Preserve separate MOVE and AIM (concurrent) and a dedicated FIRE path.
+6. **Camera is still too close.** Increase base on-foot framing further (beyond the earlier 20%),
+   keep the player readable but not speck-sized, keep aim world-space and pixel snapping intact,
+   and re-check all camera modes and biome scales.

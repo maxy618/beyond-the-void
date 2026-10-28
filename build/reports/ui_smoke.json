@@ -1,5 +1,5 @@
 {
-	"checks": 52,
+	"checks": 48,
 	"engine": {
 		"build": "official",
 		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
@@ -15,21 +15,15 @@
 	"ok": true,
 	"screenshots": [
 		"D:/beyond-the-void/build/reports/screenshots/01_title_720x1280.png",
-		"D:/beyond-the-void/build/reports/screenshots/02_space.png",
-		"D:/beyond-the-void/build/reports/screenshots/03_chart.png",
-		"D:/beyond-the-void/build/reports/screenshots/04_planet_tidebreak.png",
-		"D:/beyond-the-void/build/reports/screenshots/05_inventory.png",
-		"D:/beyond-the-void/build/reports/screenshots/06_craft.png",
-		"D:/beyond-the-void/build/reports/screenshots/07_observed.png",
-		"D:/beyond-the-void/build/reports/screenshots/08_market.png",
-		"D:/beyond-the-void/build/reports/screenshots/09_dialogue.png",
-		"D:/beyond-the-void/build/reports/screenshots/10_build.png",
-		"D:/beyond-the-void/build/reports/screenshots/11_ship.png",
-		"D:/beyond-the-void/build/reports/screenshots/12_journal.png",
-		"D:/beyond-the-void/build/reports/screenshots/13_settings.png",
-		"D:/beyond-the-void/build/reports/screenshots/14_pause.png",
-		"D:/beyond-the-void/build/reports/screenshots/15_planet_360x640.png",
-		"D:/beyond-the-void/build/reports/screenshots/16_planet_1080x2400.png"
+		"D:/beyond-the-void/build/reports/screenshots/02_entry.png",
+		"D:/beyond-the-void/build/reports/screenshots/02_surface.png",
+		"D:/beyond-the-void/build/reports/screenshots/02b_combat.png",
+		"D:/beyond-the-void/build/reports/screenshots/03_inventory.png",
+		"D:/beyond-the-void/build/reports/screenshots/04_journal.png",
+		"D:/beyond-the-void/build/reports/screenshots/05_settings.png",
+		"D:/beyond-the-void/build/reports/screenshots/06_pause.png",
+		"D:/beyond-the-void/build/reports/screenshots/07_surface_360x640.png",
+		"D:/beyond-the-void/build/reports/screenshots/07_surface_1080x2400.png"
 	],
 	"steps": [
 		{
@@ -41,7 +35,19 @@
 			"ok": true
 		},
 		{
+			"check": "title menu has no seed field",
+			"ok": true
+		},
+		{
 			"check": "screenshot 01_title_720x1280",
+			"ok": true
+		},
+		{
+			"check": "entry mini-game starts on new game",
+			"ok": true
+		},
+		{
+			"check": "screenshot 02_entry",
 			"ok": true
 		},
 		{
@@ -49,7 +55,11 @@
 			"ok": true
 		},
 		{
-			"check": "new game begins in space",
+			"check": "new game begins on a planet surface",
+			"ok": true
+		},
+		{
+			"check": "new game lands on Vela",
 			"ok": true
 		},
 		{
@@ -57,27 +67,79 @@
 			"ok": true
 		},
 		{
-			"check": "screenshot 02_space",
+			"check": "player present",
 			"ok": true
 		},
 		{
-			"check": "chart panel opens in space",
+			"check": "camera director owns a camera",
 			"ok": true
 		},
 		{
-			"check": "screenshot 03_chart",
+			"check": "world renders in a low-resolution viewport",
 			"ok": true
 		},
 		{
-			"check": "land on Vela",
+			"check": "screenshot 02_surface",
 			"ok": true
 		},
 		{
-			"check": "planet mode after landing",
+			"check": "combat director present",
 			"ok": true
 		},
 		{
-			"check": "screenshot 04_planet_tidebreak",
+			"check": "three hostiles spawned",
+			"ok": true
+		},
+		{
+			"check": "fire button present",
+			"ok": true
+		},
+		{
+			"check": "fire spawns a player bolt",
+			"ok": true
+		},
+		{
+			"check": "player enters combat pose after firing",
+			"ok": true
+		},
+		{
+			"check": "screenshot 02b_combat",
+			"ok": true
+		},
+		{
+			"check": "death hides the player for reboot",
+			"ok": true
+		},
+		{
+			"check": "player reboots after the delay",
+			"ok": true
+		},
+		{
+			"check": "reboot restores hull",
+			"ok": true
+		},
+		{
+			"check": "reboot restores shield",
+			"ok": true
+		},
+		{
+			"check": "move stick moves the player right",
+			"ok": true
+		},
+		{
+			"check": "player faces movement when aim is neutral",
+			"ok": true
+		},
+		{
+			"check": "sprint drains stamina",
+			"ok": true
+		},
+		{
+			"check": "jetpack lifts the player",
+			"ok": true
+		},
+		{
+			"check": "jetpack drains energy",
 			"ok": true
 		},
 		{
@@ -85,7 +147,7 @@
 			"ok": true
 		},
 		{
-			"check": "screenshot 05_inventory",
+			"check": "screenshot 03_inventory",
 			"ok": true
 		},
 		{
@@ -93,103 +155,11 @@
 			"ok": true
 		},
 		{
-			"check": "screenshot 06_craft",
-			"ok": true
-		},
-		{
-			"check": "craft panel fabricates alloy plate",
-			"ok": true
-		},
-		{
-			"check": "surface contains flora",
-			"ok": true
-		},
-		{
-			"check": "scan target selected",
-			"ok": true
-		},
-		{
-			"check": "UI observe records species",
-			"ok": true
-		},
-		{
-			"check": "observation count advances",
-			"ok": true
-		},
-		{
-			"check": "screenshot 07_observed",
-			"ok": true
-		},
-		{
-			"check": "UI gather adds harvest item",
-			"ok": true
-		},
-		{
-			"check": "market target selected",
-			"ok": true
-		},
-		{
-			"check": "market panel opens from world target",
-			"ok": true
-		},
-		{
-			"check": "screenshot 08_market",
-			"ok": true
-		},
-		{
-			"check": "market panel buy spends credits",
-			"ok": true
-		},
-		{
-			"check": "market panel buy reduces stock",
-			"ok": true
-		},
-		{
-			"check": "npc target selected",
-			"ok": true
-		},
-		{
-			"check": "dialogue panel opens from world target",
-			"ok": true
-		},
-		{
-			"check": "screenshot 09_dialogue",
-			"ok": true
-		},
-		{
-			"check": "dialogue choice advances node",
-			"ok": true
-		},
-		{
-			"check": "build panel opens",
-			"ok": true
-		},
-		{
-			"check": "screenshot 10_build",
-			"ok": true
-		},
-		{
-			"check": "build panel places power cell",
-			"ok": true
-		},
-		{
-			"check": "ship panel opens",
-			"ok": true
-		},
-		{
-			"check": "screenshot 11_ship",
-			"ok": true
-		},
-		{
-			"check": "ship panel equips cargo pods",
-			"ok": true
-		},
-		{
 			"check": "journal panel opens",
 			"ok": true
 		},
 		{
-			"check": "screenshot 12_journal",
+			"check": "screenshot 04_journal",
 			"ok": true
 		},
 		{
@@ -197,7 +167,7 @@
 			"ok": true
 		},
 		{
-			"check": "screenshot 13_settings",
+			"check": "screenshot 05_settings",
 			"ok": true
 		},
 		{
@@ -209,7 +179,7 @@
 			"ok": true
 		},
 		{
-			"check": "screenshot 14_pause",
+			"check": "screenshot 06_pause",
 			"ok": true
 		},
 		{
@@ -217,27 +187,35 @@
 			"ok": true
 		},
 		{
-			"check": "gameplay generated journal entries",
+			"check": "move stick on screen at 360x640",
 			"ok": true
 		},
 		{
-			"check": "gameplay generated codex observations",
+			"check": "aim stick on screen at 360x640",
 			"ok": true
 		},
 		{
-			"check": "screenshot 15_planet_360x640",
+			"check": "world viewport stays usable at 360x640",
 			"ok": true
 		},
 		{
-			"check": "tall 9:20 dock fits portrait width",
+			"check": "screenshot 07_surface_360x640",
 			"ok": true
 		},
 		{
-			"check": "tall 9:20 joystick remains on screen",
+			"check": "move stick on screen at 1080x2400",
 			"ok": true
 		},
 		{
-			"check": "screenshot 16_planet_1080x2400",
+			"check": "aim stick on screen at 1080x2400",
+			"ok": true
+		},
+		{
+			"check": "world viewport stays usable at 1080x2400",
+			"ok": true
+		},
+		{
+			"check": "screenshot 07_surface_1080x2400",
 			"ok": true
 		}
 	],

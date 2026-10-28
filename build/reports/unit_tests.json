@@ -1,16 +1,16 @@
 {
 	"abort_reason": "",
-	"duration_ms": 1330,
+	"duration_ms": 964,
 	"engine_version": "4.7.2-stable (official)",
 	"failed": 0,
-	"generated_at_unix": 1793027051,
-	"passed": 67,
+	"generated_at_unix": 1793147599,
+	"passed": 72,
 	"project": "res://project.godot",
 	"results": [
 		{
 			"assertions": 111,
 			"category": "unit",
-			"duration_ms": 0,
+			"duration_ms": 1,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_content.gd",
@@ -19,7 +19,7 @@
 		{
 			"assertions": 64,
 			"category": "unit",
-			"duration_ms": 1,
+			"duration_ms": 0,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_content.gd",
@@ -37,7 +37,7 @@
 		{
 			"assertions": 9,
 			"category": "unit",
-			"duration_ms": 0,
+			"duration_ms": 1,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_content.gd",
@@ -55,7 +55,7 @@
 		{
 			"assertions": 2,
 			"category": "unit",
-			"duration_ms": 2,
+			"duration_ms": 1,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_content.gd",
@@ -64,7 +64,7 @@
 		{
 			"assertions": 1,
 			"category": "unit",
-			"duration_ms": 1,
+			"duration_ms": 2,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_content.gd",
@@ -73,7 +73,7 @@
 		{
 			"assertions": 2,
 			"category": "unit",
-			"duration_ms": 1,
+			"duration_ms": 0,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_inventory_crafting.gd",
@@ -163,7 +163,7 @@
 		{
 			"assertions": 3,
 			"category": "unit",
-			"duration_ms": 1,
+			"duration_ms": 0,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_market.gd",
@@ -181,7 +181,7 @@
 		{
 			"assertions": 3,
 			"category": "unit",
-			"duration_ms": 0,
+			"duration_ms": 1,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_market.gd",
@@ -190,7 +190,7 @@
 		{
 			"assertions": 33,
 			"category": "unit",
-			"duration_ms": 1,
+			"duration_ms": 0,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_market.gd",
@@ -199,7 +199,7 @@
 		{
 			"assertions": 3,
 			"category": "unit",
-			"duration_ms": 0,
+			"duration_ms": 1,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_market.gd",
@@ -280,7 +280,7 @@
 		{
 			"assertions": 8,
 			"category": "unit",
-			"duration_ms": 3,
+			"duration_ms": 2,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_ecology.gd",
@@ -289,7 +289,7 @@
 		{
 			"assertions": 7,
 			"category": "unit",
-			"duration_ms": 0,
+			"duration_ms": 1,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_ecology.gd",
@@ -325,7 +325,7 @@
 		{
 			"assertions": 4,
 			"category": "unit",
-			"duration_ms": 2,
+			"duration_ms": 1,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_quest_dialogue.gd",
@@ -334,7 +334,7 @@
 		{
 			"assertions": 4,
 			"category": "unit",
-			"duration_ms": 2,
+			"duration_ms": 3,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_quest_dialogue.gd",
@@ -352,7 +352,7 @@
 		{
 			"assertions": 3,
 			"category": "unit",
-			"duration_ms": 1,
+			"duration_ms": 0,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_quest_dialogue.gd",
@@ -379,7 +379,7 @@
 		{
 			"assertions": 3,
 			"category": "unit",
-			"duration_ms": 1,
+			"duration_ms": 0,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_build_ship.gd",
@@ -388,7 +388,7 @@
 		{
 			"assertions": 9,
 			"category": "unit",
-			"duration_ms": 3,
+			"duration_ms": 2,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_build_ship.gd",
@@ -451,7 +451,7 @@
 		{
 			"assertions": 7,
 			"category": "unit",
-			"duration_ms": 43,
+			"duration_ms": 49,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_save.gd",
@@ -460,7 +460,7 @@
 		{
 			"assertions": 3,
 			"category": "unit",
-			"duration_ms": 13,
+			"duration_ms": 15,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_save.gd",
@@ -469,7 +469,7 @@
 		{
 			"assertions": 4,
 			"category": "unit",
-			"duration_ms": 16,
+			"duration_ms": 19,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_save.gd",
@@ -478,7 +478,7 @@
 		{
 			"assertions": 19,
 			"category": "unit",
-			"duration_ms": 18,
+			"duration_ms": 20,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_save.gd",
@@ -487,7 +487,7 @@
 		{
 			"assertions": 4,
 			"category": "unit",
-			"duration_ms": 29,
+			"duration_ms": 31,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_save.gd",
@@ -496,7 +496,7 @@
 		{
 			"assertions": 3,
 			"category": "unit",
-			"duration_ms": 17,
+			"duration_ms": 21,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_save.gd",
@@ -505,7 +505,7 @@
 		{
 			"assertions": 5,
 			"category": "unit",
-			"duration_ms": 10,
+			"duration_ms": 12,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_save.gd",
@@ -514,7 +514,7 @@
 		{
 			"assertions": 4,
 			"category": "unit",
-			"duration_ms": 25,
+			"duration_ms": 34,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_save.gd",
@@ -523,7 +523,7 @@
 		{
 			"assertions": 9,
 			"category": "unit",
-			"duration_ms": 13,
+			"duration_ms": 16,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_save.gd",
@@ -532,7 +532,7 @@
 		{
 			"assertions": 1,
 			"category": "unit",
-			"duration_ms": 143,
+			"duration_ms": 149,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_worldgen.gd",
@@ -541,16 +541,16 @@
 		{
 			"assertions": 16,
 			"category": "unit",
-			"duration_ms": 2,
+			"duration_ms": 1,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_worldgen.gd",
 			"test": "test_frontier_is_seeded_and_linked"
 		},
 		{
-			"assertions": 90,
+			"assertions": 108,
 			"category": "unit",
-			"duration_ms": 0,
+			"duration_ms": 1,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_worldgen.gd",
@@ -559,7 +559,7 @@
 		{
 			"assertions": 5,
 			"category": "unit",
-			"duration_ms": 1,
+			"duration_ms": 0,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_worldgen.gd",
@@ -577,7 +577,7 @@
 		{
 			"assertions": 2,
 			"category": "unit",
-			"duration_ms": 3,
+			"duration_ms": 4,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_worldgen.gd",
@@ -586,7 +586,7 @@
 		{
 			"assertions": 3,
 			"category": "unit",
-			"duration_ms": 5,
+			"duration_ms": 4,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_worldgen.gd",
@@ -609,8 +609,53 @@
 			"status": "passed",
 			"suite": "res://scripts/tests/test_input.gd",
 			"test": "test_move_vector_is_clamped"
+		},
+		{
+			"assertions": 5,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_combat.gd",
+			"test": "test_death_and_revive"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_combat.gd",
+			"test": "test_fire_cooldown"
+		},
+		{
+			"assertions": 1,
+			"category": "unit",
+			"duration_ms": 1,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_combat.gd",
+			"test": "test_hit_center_accounts_for_altitude"
+		},
+		{
+			"assertions": 21,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_combat.gd",
+			"test": "test_hostile_plan_is_deterministic"
+		},
+		{
+			"assertions": 4,
+			"category": "unit",
+			"duration_ms": 0,
+			"message": "",
+			"status": "passed",
+			"suite": "res://scripts/tests/test_combat.gd",
+			"test": "test_shield_absorbs_before_hull"
 		}
 	],
 	"schema_version": 1,
-	"total": 67
+	"total": 72
 }

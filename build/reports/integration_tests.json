@@ -1,16 +1,16 @@
 {
 	"abort_reason": "",
-	"duration_ms": 1331,
+	"duration_ms": 965,
 	"engine_version": "4.7.2-stable (official)",
 	"failed": 0,
-	"generated_at_unix": 1793027051,
+	"generated_at_unix": 1793147599,
 	"passed": 1,
 	"project": "res://project.godot",
 	"results": [
 		{
 			"assertions": 52,
 			"category": "integration",
-			"duration_ms": 21,
+			"duration_ms": 24,
 			"message": "",
 			"status": "passed",
 			"suite": "res://scripts/tests/test_e2e.gd",
